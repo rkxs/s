@@ -1,403 +1,85 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="description" content="前端工程师的个人主页！">
-  <meta name="description" content="这个年纪放弃梦想太年轻了不是吗">
-  <meta name="description" content="blend-赵丽强">
-  <link rel="shortcut icon" href="./images/icon/icon.ico"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
-  <title>Blend</title>
-  <script src="js/jquery.js"></script>
-  <script src="js/jquery-mousewheel.js"></script>
-  <script src="js/font/fittext.js"></script>
-  <script src="js/font/textillate.js"></script>
-  <script src="js/font/Lettering.js"></script>
-  <script src="js/hover.js"></script>
-  <script src="js/imgArr.js"></script>
-  <script src="js/PreloadJS.js"></script>
-  <script src="js/index.js?v=1.0.1"></script>
-  <script src="js/swiper/swiper-3.4.1.jquery.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/animate.css">
-  <link rel="stylesheet" type="text/css" href="css/index.css">
-  <link rel="stylesheet" type="text/css" href="js/font/animate.css">
-  <link rel="stylesheet" href="js/swiper/swiper-3.4.1.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>二维码生成</title>
+    <style>
+        #qrcode,
+		#text {
+			max-width: 1024px;
+		}
+		#text {
+			width: 95%;
+		}
+        img {
+            border: 1px #ddd solid;
+        }
+	</style>
 </head>
+
 <body>
-<audio src="1.mp3">您的浏览器不支持 audio 标签。</audio>
-<div class="loding_box">
-  <canvas id="canvaszz"></canvas>
-  <canvas id="lodings" width="250" height="250"></canvas>
-  <h6 class="tips">Tips: 本页面特效较多，建议在chrome浏览器中打开。</h6>
-  <h5 class="ing">加载中>>></h5>
-</div>
-<div class="swiper-container">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide swiper-no-swiping first">
-      <img src="images/header1.png" alt="">
-      <div class="box">
-        <h2 style="transform: translateX(-180px)">我们这么努力，也不过就是为了成为一个普通人罢了</h2>
-      </div>
-    </div>
-    <div class="swiper-slide swiper-no-swiping second">
-      <img src="images/header2.png" alt="">
-      <div class="box">
-        <h2>但是这个年纪放弃梦想太年轻了不是吗</h2>
-      </div>
-    </div>
-    <div class="swiper-slide swiper-no-swiping three">
-      <img src="images/header3.png" alt="">
-      <div class="box">
-        <h2>WELCOME TO MY HOME PAGE</h2>
-        <h5>YOU CAN CONTACT ME IN THE FOLLOWING WAYS YOU CAN CONTACT ME IN THE FOLLOWING WAYS</h5>
-        <img class="ani go_two" src="images/menu.png" alt="">
-      </div>
-    </div>
-  </div>
-</div>
-<div class="menu_box pm">
-  <canvas id="canvas1" width="1903" height="140"></canvas>
-  <div class="menu">
-    <span class="active">
-        <i class="top">HOME</i>
-        <i class="bottom">HOME</i>
-    </span>
-    <span>
-        <i class="top">ABOUT</i>
-        <i class="bottom">ABOUT</i>
-    </span>
-    <span>
-        <i class="top">SKILL</i>
-        <i class="bottom">SKILL</i>
-    </span>
-    <span>
-        <i class="top">EXPERINCE</i>
-        <i class="bottom">EXPERINCE</i>
-    </span>
-    <span>
-        <i class="top">CONTACT</i>
-        <i class="bottom">CONTACT</i>
-    </span>
-  </div>
-</div>
-<div class="item first ">
-  <div class="person">
-    <img class="resume" src="images/resume.png" alt="">
-    <img class="name" src="images/name.png" alt="">
-    <ul>
-      <li>我是一名平凡的程序猿</li>
-      <li>但我拥有不平凡的志向</li>
-      <li>前端，因我而精彩！</li>
-    </ul>
-    <ol>
-      <li>一个生活乐观，</li>
-      <li>风趣幽默，</li>
-      <li>工作中不失严谨的技术男！</li>
-    </ol>
-  </div>
-</div>
-<div class="item second pm">
-  <div class="skill">
-    <!--<img class="bg" src="./images/skill.png" alt="">-->
-    <canvas id="bgs" width="1080" height="560"></canvas>
-    <div class="dial">
-      <ul class="turn">
-        <li>
-          <div class="skills vue">
-            <img src="images/skill/vue.jpg" alt="">
-            <span>90%</span>
-            <canvas class="ratio" id="of90" width="140" height="140"></canvas>
-            <div class="desc">
-              Vue.js是一套构建用户界面的渐进式框架.Vue 采用自底向上增量开发的设计。Vue 的核心库只关注视图层.他的目标是通过尽可能简单的 API 实现响应的数据绑定和组合的视图组件。
-            </div>
-          </div>
-          <div class="skills active node">
-            <img src="images/skill/node.jpg" alt="">
-            <span>86%</span>
-            <canvas class="ratio" id="of86" width="140" height="140"></canvas>
-            <div class="desc">
-              Node.js是一个基于Chrome JavaScript运行时建立的平台， 用于方便地搭建响应速度快、易于扩展的网络应用。
-            </div>
-          </div>
-          <div class="skills js">
-            <img src="images/skill/js.jpg" alt="">
-            <canvas class="ratio" id="of96" width="140" height="140"></canvas>
-            <span>96%</span>
-            <div class="desc">
-              JavaScript一种直译式脚本语言，是一种动态类型、弱类型、基于原型的语言，内置支持类型。
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="skills ajax">
-            <img src="images/skill/ajax.jpg" alt="">
-            <canvas class="ratio" id="of98" width="140" height="140"></canvas>
-            <span>98%</span>
-            <div class="desc">
-              Ajax 指异步 JavaScript 及 XML（Asynchronous JavaScript And XML）。通过 AJAX，你可以创建更好、更快以及更友好的 WEB
-              应用程序。
-            </div>
-          </div>
-          <div class="skills active php">
-            <img src="images/skill/php.jpg" alt="">
-            <canvas class="ratio" id="of80" width="140" height="140"></canvas>
-            <span>80%</span>
-            <div class="desc">
-              PHP（外文名:PHP: Hypertext
-              Preprocessor）是一种通用开源脚本语言。语法吸收了C语言、Java和Perl的特点，利于学习，使用广泛，主要适用于Web开发领域。
-            </div>
-          </div>
-          <div class="skills h5">
-            <img src="images/skill/h5.jpg" alt="">
-            <canvas class="ratio" id="of95" width="140" height="140"></canvas>
-            <span>95%</span>
-            <div class="desc">
-              HTML5 是一个新的web标准的集合，它包括全新定义的HTML标签和更为规范化的HTML标签，CSS3以及全新的javascript API接口。
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="skills c3">
-            <img src="images/skill/c3.jpg" alt="">
-            <span>94%</span>
-            <canvas class="ratio" id="of94" width="140" height="140"></canvas>
-            <div class="desc">
-              css3则是css的最新标准版本,利用HTML5+CSS3组合，可能简单几行代码就能够实现以前需要很多代码配合js才能实现的功能。
-            </div>
-          </div>
-          <div class="skills  active msql">
-            <img src="images/skill/msql.jpg" alt="">
-            <span>78%</span>
-            <canvas class="ratio" id="of78" width="140" height="140"></canvas>
-            <div class="desc">
-              MySQL是一种开放源代码的关系型数据库管理系统（RDBMS），使用最常用的数据库管理语言--结构化查询语言（SQL）进行数据库管理。
-            </div>
-          </div>
-          <div class="skills ps">
-            <img src="images/skill/ps.jpg" alt="">
-            <span>88%</span>
-            <canvas class="ratio" id="of88" width="140" height="140"></canvas>
-            <div class="desc">
-              PS主要处理以像素所构成的数字图像。使用其众多的编修与绘图工具，可以有效地进行图片编辑工作。ps有很多功能，在图像、图形、文字、视频、出版等各方面都有涉及。
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <img class="personal" src="images/skill1.png" alt="">
-  </div>
-</div>
-<div class="item three pm">
-  <h1 style="margin-top: 50px;">
-    <span data-letter="E">E</span>
-    <span data-letter="X">X</span>
-    <span data-letter="P">P</span>
-    <span data-letter="E">E</span>
-    <span data-letter="R">R</span>
-    <span data-letter="I">I</span>
-    <span data-letter="E">E</span>
-    <span data-letter="N">N</span>
-    <span data-letter="C">C</span>
-    <span data-letter="E">E</span>
-  </h1>
-  <div class="nav">
-    <div class="nav_li">
-      <ul>
-        <li class="active"><a href="javascript:;">ALL</a></li>
-        <li><a href="javascript:;">PHONE</a></li>
-        <li><a href="javascript:;">PC</a></li>
-        <li><a href="javascript:;">BLOG</a></li>
-        <li><a href="javascript:;">GAME</a></li>
-        <li><a href="javascript:;">ELSE</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="experience">
-    <div class="items noone active">
-      <iframe src="3d/index.html" frameborder="0"
-              style="width: 1200px;margin: 0 auto;height: 700px;display: block;"></iframe>
-    </div>
-    <div class="items phone">
-      <ul id="da-thumbs2" class="da-thumbs">
-        <li>
-          <a href="http://cachago.cn/" target="_blank">
-            <img src="images/experience/kxg.png"/>
-            <div><h3>开心购</h3><span>这是我公司针对上海以及周边城市的富豪人家开发的一个购物网站。我们的优点是商品多，购物便捷。用户体验效果好。</span></div>
-          </a>
-        </li>
-        <li>
-          <a href="http://laago.cn/" target="_blank">
-            <img src="images/experience/lg.png"/>
-            <div><h3>啦购</h3><span>这是一款针对在中国的外国人的购物网站。可以实现中英文的切换。让外国人能在中国买到在外国同样优惠的商品。</span></div>
-          </a>
-        </li>
-        <li>
-          <a href="https://liqiangzhao.github.io/notes/" target="_blank">
-            <img src="images/experience/todo.png"/>
-            <div><h3>Note</h3><span>应用H5的localstorage属性做的一个Todo应用</span></div>
-          </a>
-        </li>
-        <li>
-          <a href="https://liqiangzhao.github.io/tmall/" target="_blank">
-            <img src="images/experience/tmall.png"/>
-            <div><h3>Tmall</h3><span>手机端的页面布局跟js动效</span></div>
-          </a>
-        </li>
-        <li>
-          <a href="http://zlqwb123.duapp.com/" target="_blank">
-            <img src="images/experience/lxr.png"/>
-            <div><h3>联系人</h3><span>简单练习前后台的数据交互,用的node.js做的后台,简单掌握了ajax跟node跟sql数据库的应用。</span></div>
-          </a>
-        </li>
-        <li>
-          <a href="https://liqiangzhao.github.io/apple/" target="_blank">
-            <img src="images/experience/apple_phone.png"/>
-            <div><h3>apple-phone</h3><span>模拟apple官网的响应式，根据屏幕尺寸的变化来控制页面的css样式</span></div>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="items pc">
-      <ul id="da-thumbs3" class="da-thumbs">
-        <li>
-          <a href="http://www.cacha.cn/" target="_blank">
-            <img src="images/experience/shkx.png"/>
-            <div><h3>上海凯夏国际</h3><span>上海凯夏国际贸易有限公司官网，是为了让来宾，客服，合作伙伴能了解公司的历史，文化，背景，实力。同时也是为了公司能长久的发展。</span>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href="https://blend-y.github.io/" target="_blank">
-            <img src="images/experience/bk.png"/>
-            <div><h3>博客</h3>
-              <span>这个是我用hexo跟github开发的个人博客，在这个我会写一些工作中遇到的难点，解决的时候的心得，对一些技术有自己的理解，，，都会写在个人博客上边</span>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href="http://www.sxoxdl.cn/" target="_blank">
-            <img src="images/experience/oxdl.png"/>
-            <div><h3>山西欧迅电力</h3>
-              <span>山西欧迅电力建设有限公司官网是外包项目，主要应用了Phpcms使得用户在后期维护相对方便。可使其长期使用，即使更改数据。已经上线使用。</span></div>
-          </a>
-        </li>
-        <li>
-          <a href="http://www.szvc.com.cn/" target="_blank">
-            <img src="images/experience/szct.png"/>
-            <div><h3>深圳市创新投资集团</h3><span>深圳市创新投资集团有限公司官网是外包项目，主要应用了Phpcms使得用户在后期维护相对方便。可使其长期使用，即使更改数据。已经上线使用。</span>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href="https://liqiangzhao.github.io/yintai/" target="_blank">
-            <img src="./images/experience/yt.png"/>
-            <div><h3>银泰</h3><span>早期为了练习布局时所模仿的网页，这个上边布局很独特，所以拿来模仿。</span></div>
-          </a>
-        </li>
-        <li>
-          <a href="https://liqiangzhao.github.io/apple/" target="_blank">
-            <img src="images/experience/apple.png"/>
-            <div><h3>Apple</h3><span>早期听说APPLE是应用css3做成的，所以就自己试试，效果还是可以的。在css3动画停顿了半天，通过自己查资料解决掉的。</span>
-            </div>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="items blog">
-      <ul id="da-thumbs4" class="da-thumbs">
-        <li>
-          <a href="https://blend-y.github.io/" target="_blank">
-            <img src="images/experience/bk.png"/>
-            <div><h3>博客</h3>
-              <span>这个是我用hexo跟github开发的个人博客，在这个我会写一些工作中遇到的难点，解决的时候的心得，对一些技术有自己的理解，，，都会写在个人博客上边</span>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href="https://liqiangzhao.github.io/canvas/" target="_blank">
-            <img src="images/experience/canvas.png"/>
-            <div><h3>Canvas图案解锁</h3><span>应用H5的canvas，实现了记录.解锁.手指拖动的功能；</span></div>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="items GAME">
-      <ul id="da-thumbs1" class="da-thumbs">
-        <li>
-          <a href="https://liqiangzhao.github.io/poke/" target="_blank">
-            <img src="images/experience/poke.png"/>
-            <div><h3>扑克牌</h3><span>一款简单的小游戏，通过做这个游戏，更加巩固了自己的js知识跟对数据的处理。</span></div>
-          </a>
-        </li>
-        <li>
-          <a href="https://liqiangzhao.github.io/snake/" target="_blank">
-            <img src="images/experience/snack.png"/>
-            <div><h3>贪吃蛇</h3><span>应用div来写的一个贪吃蛇的小游戏，来锻炼自己的逻辑能力。</span></div>
-          </a>
-        </li>
-        <li>
-          <a href="https://liqiangzhao.github.io/gobang/" target="_blank">
-            <img src="images/experience/wzq.png"/>
-            <div><h3>五子棋</h3><span>应用了canvas标签写出的一个小游戏。通过这个熟练掌握了canvas的用法。</span></div>
-          </a>
-        </li>
-        <li>
-          <a href="https://liqiangzhao.github.io/snack_ai/" target="_blank">
-            <img src="images/experience/snack_ai.png"/>
-            <div><h3>贪吃蛇AI</h3><span>用H5的canvas写的不一样的贪吃蛇，可以自己控制，也可以通过AI来控制。看电脑自己怎么吃掉食物。应用了预算法等</span></div>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="items else">
-      <ul id="da-thumbs5" class="da-thumbs">
-        <li>
-          <a href="https://liqiangzhao.github.io/iColud/" target="_blank">
-            <img src="images/experience/iColud.png"/>
-            <div><h3>iCloud</h3><span>是应用angular.js模仿苹果做的数据联动的一个应用</span></div>
-          </a>
-        </li>
-        <li>
-          <a href="https://liqiangzhao.github.io/music/" target="_blank">
-            <img src="images/experience/music.png"/>
-            <div><h3>音乐</h3><span>自己为了熟练应用下H5的audio标签，所作出的一个音乐播放器，难度是有的，但还是客服了！</span></div>
-          </a>
-        </li>
-        <li>
-          <a href="https://liqiangzhao.github.io/photo/" target="_blank">
-            <img src="images/experience/photo.png"/>
-            <div><h3>PHOTO</h3><span>这是为了熟练应用jQuery库而做的一个小相册。</span></div>
-          </a>
-        </li>
-        <li>
-          <a href="https://liqiangzhao.github.io/time/" target="_blank">
-            <img src="images/experience/time.png"/>
-            <div><h3>时钟</h3><span>进一步熟练应用canvas标签的用法</span></div>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
-<div class="item four pm">
-  <div class="contact">
-    <img src="images/top.png" class="contents" alt="">
-    <h2 class="tlt" data-in-effect="rollIn">尽吾志也而不能至者, 可以无悔矣!</h2>
-    <ul>
-      <li class="a1">身不饥寒，天未曾负我</li>
-      <li class="a2">学无长进，我何以对天</li>
-      <li class="a3">命是弱者的借口，运是强者的谦辞</li>
-      <li class="a4">Yesterday you said tomorrow.</li>
-      <li class="a5">If you need me,Please contact me!</li>
-    </ul>
-    <dl class="ani">
-      <dd>Phone: <a href="tle:13321838862" target="_blank">13321838862</a></dd>
-      <dd>Email: <a href="Mailto:1281990857@qq.com" target="_blank">1281990857@qq.com</a></dd>
-      <dd>Blog: <a href="https://blend-y.github.io" target="_blank">blend-y.github.io</a></dd>
-    </dl>
-    <img src="images/feiji.png" alt="" class="fly">
-  </div>
-</div>
-<script src="js/kx.js"></script>
+
+    <center>
+        <p>
+            <a href="/">
+                <img src="https://i.loli.net/2020/12/17/fLHm7vlD6WE3NRO.jpg">
+            </a>
+        </p>
+        <textarea id="text" type="text" placeholder="请输入内容" rows="23.333" cols="23.333" autofocus></textarea>
+        <p id="qrcode"></p>
+    </center>
+    <script>
+        text.value = window.location.hash.substring(1);
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/combine/npm/jquery@2.2.4/dist/jquery.min.js,gh/lrsjng/jquery-qrcode@0.14.0/dist/jquery-qrcode.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/lrsjng/jquery-qrcode@0.14.0/dist/jquery-qrcode.min.js"></script> -->
+    <script type="text/javascript">
+        $(function () {
+
+            function qr(text) {
+                var options = {
+                    render: 'canvas',
+                    size: 300,
+                    ecLevel: 'Q',
+                    fill: '#233',
+                    background: null,
+                    text: text,
+                    label: '👼',
+                    fontname: 'sans',
+                    fontcolor: '#233',
+                    quiet: 0,
+                    mode: 2
+                };
+                $("#qrcode").empty().qrcode(options);
+            }
+
+
+
+            if (window.location.hash) {
+                var v = window.location.hash.substring(1);
+                $("#text").val(v);
+                qr(v);
+            }
+
+            $("#text").on("input", function (e) {
+                var v = $(e.target).val();
+                window.location.hash = v;
+                qr(v);
+                if (v === "") {
+                    qrcode.innerHTML = '？？？？？？'
+                } else {
+                    qr(v);
+                }
+            })
+        })
+
+        // "serviceWorker"in navigator&&navigator.serviceWorker.register("/tools/sw.js");
+    </script>
 </body>
+
 </html>
