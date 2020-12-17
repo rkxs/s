@@ -1,0 +1,613 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>3D</title>
+
+    <meta name="Keywords" content="网友Adam‘分享用Aui-core实现的图片3D旋转JS特效,Jquery插件,Jquery原创,Jquery资源,Jquery特效,div+css,JquerySchool" />
+
+    <style>
+        * { margin:0; padding:0; list-style:none; }
+        body { background:#333; overflow:hidden;}
+        #stage {
+            width:200px; height:300px; position:relative; margin:0 auto; margin-top:150px;background:null;
+            -webkit-transform:rotateX(-10deg) rotateY(0deg) perspective(2000px);
+            -moz-transform:rotateX(-10deg) rotateY(0deg) perspective(2000px);
+            -ms-transform:rotateX(-10deg) rotateY(0deg) perspective(2000px);
+            -o-transform:rotateX(-10deg) rotateY(0deg) perspective(2000px);
+            transform:rotateX(-10deg) rotateY(0deg) perspective(2000px);
+            -webkit-transform-style:preserve-3d;
+            -moz-transform-style:preserve-3d;
+            -ms-transform-style:preserve-3d;
+            -o-transform-style:preserve-3d;
+            transform-style:preserve-3d;
+        }
+        #shadow {
+            position:absolute; left:50%; top:50%; width:1200px; height:1200px; margin-left:-600px; margin-top:-600px;
+            background:-webkit-radial-gradient(center center, 600px 600px ,rgba(50,50,50,1), rgba(0,0,0,0));
+            background:   -moz-radial-gradient(center center, 600px 600px ,rgba(50,50,50,1), rgba(0,0,0,0));
+            background:    -ms-radial-gradient(center center, 600px 600px ,rgba(50,50,50,1), rgba(0,0,0,0));
+            background:     -o-radial-gradient(center center, 600px 600px ,rgba(50,50,50,1), rgba(0,0,0,0));
+            background:        radial-gradient(center center, 600px 600px ,rgba(50,50,50,1), rgba(0,0,0,0));
+            -webkit-transform:translateY(200px) rotateX(90deg);
+            -moz-transform:translateY(200px) rotateX(90deg);
+            -ms-transform:translateY(200px) rotateX(90deg);
+            -o-transform:translateY(200px) rotateX(90deg);
+            transform:translateY(200px) rotateX(90deg);
+        }
+        #stage dd {
+            height:300px; width:200px; position:absolute; left:0; top:0; border:1px solid #666;
+            -webkit-transition:500ms all ease;
+            -moz-transition:500ms all ease;
+            -ms-transition:500ms all ease;
+            -o-transition:500ms all ease;
+            transition:500ms all ease;
+            background-repeat: no-repeat;
+            background-position: center center;
+            -webkit-background-size:cover;
+            background-size:cover;
+        }
+        #stage dd .box{
+            width:100%;
+            height:100%;
+            position: relative;
+        }
+        #stage dd .box a{
+            position: absolute;
+            display: block;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            margin:auto;
+            color: #fff;
+            text-decoration: none;
+            transition: all .5s linear;
+            transform: scale(0);
+            opacity:0;
+            text-align: center;
+            width:100%;
+            height:100%;
+            background: rgba(0,0,0,0.8);
+            font-size: 12px;
+            border: 1px solid #ccc;
+            line-height: 20px;
+        }
+        #stage dd:hover .box a{
+            transform: scale(1);
+            opacity:1;
+        }
+        #stage dd .box a h1{
+            width:100%;
+            margin-top: 40px;
+            line-height: 80px;
+            font-size: 22px;
+        }
+        .over {
+            position:absolute; left:0; top:320px; width:200px; height:300px; overflow:hidden;
+            -webkit-transition:2s all ease;
+            -moz-transition:2s all ease;
+            -ms-transition:2s all ease;
+            -o-transition:2s all ease;
+            transition:2s all ease;
+            -webkit-transform:scale(1,-1);
+            -moz-transform:scale(1,-1);
+            -ms-transform:scale(1,-1);
+            -o-transform:scale(1,-1);
+            transform:scale(1,-1);
+            background-size:100% 100%;
+            opacity:0;
+        }
+    </style>
+    <script src="Aui-core-1.42-min.js" language="javascript" type="text/javascript"></script>
+    <script language="javascript" type="text/javascript">
+        var lists={
+            _src:[
+                "../images/experience/kxg.png",
+                "../images/experience/lg.png",
+                "../images/experience/bk.png",
+                "../images/experience/oxdl.png",
+                "../images/experience/szct.png",
+                "../images/experience/shkx.png"
+            ],
+            _herf:
+                [
+                    "http://cachago.cn/",
+                    "http://laago.cn/",
+                    "https://blend-y.github.io/",
+                    "http://www.sxoxdl.cn/",
+                    "http://www.szvc.com.cn/",
+                    "http://www.cacha.cn/"
+                ],
+            _title:[
+                "开心购",
+                "啦购",
+                "博客",
+                "欧迅电力",
+                "创新投资集团",
+                "凯夏国际"
+            ],
+            _des:  [
+                "这是我公司针对上海以及周边城市的富豪人家开发的一个购物网站。我们的优点是商品多，购物便捷。用户体验效果好。",
+                "这是一款针对在中国的外国人的购物网站。可以实现中英文的切换。让外国人能在中国买到在外国同样优惠的商品。",
+                "这个是我用hexo跟github开发的个人博客，在这个我会写一些工作中遇到的难点，解决的时候的心得，对一些技术有自己的理解，都会写在个人博客上边",
+                "山西欧迅电力建设有限公司官网是外包项目，主要应用了Phpcms使得用户在后期维护相对方便。可使其长期使用，即使更改数据。已经上线使用。",
+                "深圳市创新投资集团有限公司官网是外包项目，主要应用了Phpcms使得用户在后期维护相对方便。可使其长期使用，即使更改数据。已经上线使用。",
+                "上海凯夏国际贸易有限公司官网，是为了让来宾，客服，合作伙伴能了解公司的历史，文化，背景，实力。同时也是为了公司能长久的发展。"
+            ]
+
+            }
+        var Effect = function( a, w, h, s, p, x, y, l,t,d )
+        {
+            var _3Deffect = function( array , width , height , stage , per , x , y , links,title,desc )
+            {
+                this.oDoc = document;
+                this.stage = stage;
+                this.width = width;
+                this.height = height;
+                this.path = array;
+                //links
+                this.links=links;
+                this.link_id=0;
+                this.link_arr=[];
+                //arr
+                this.title=title;
+                this.title_id=0;
+                this.title_arr=[];
+                //desc
+                this.desc=desc;
+                this.desc_id=0;
+                this.desc_arr=[];
+                this.domStr = "<dt id=\"shadow\"></dt>";
+                this.return_ele=function (i,arr) {
+                    return arr[i];
+                }
+                this.perspective = per,
+                    this.rotateX = x,
+                    this.rotateY = y,
+                    this.speedX=0,
+                    this.speedY=0;
+            }
+            _3Deffect.prototype = {
+                transform : function( elem, value, key )
+                {
+                    key = key || "transform";
+                    [ "-webkit-", "-moz-", "-ms-", "-o-", "" ].forEach( function( pre )
+                    {
+                        elem.style[ pre + key ] = value;
+                    });
+                    return elem;
+                },
+                piece : function( value, key )
+                {
+                    var str = "";
+                    key = key || "transform";
+                    [ "-webkit-", "-moz-", "-ms-", "-o-",  "" ].forEach( function( pre )
+                    {
+                        str += ( key + ":" + pre + value );
+                        return false;
+                    });
+                    return str;
+                },
+                addEvent : function ( obj, sEvent, fn )
+                {
+                    if( obj.attachEvent )
+                    {
+                        obj.attachEvent( "on" + sEvent, fn );
+                    }
+                    else
+                    {
+                        obj.addEventListener( sEvent, fn, false );
+                    };
+                },
+
+
+                onMouseWheel : function( e )
+
+                {
+
+                    var _o = this;
+
+                    if( e.wheelDelta ? e.wheelDelta < 0 : e.detail > 0 )
+
+                    {
+
+                        if( _o.perspective < 4000 )
+
+                        {
+
+                            _o.perspective += 150;
+
+                        };
+
+
+
+                    }
+
+                    else
+
+                    {
+
+                        if( _o.perspective > 350 )
+
+                        {
+
+                            _o.perspective -= 150;
+
+                        };
+
+                    };
+
+
+
+                    _o.transform( _o.stage[0], "perspective(" + _o.perspective + "px) rotateX("+ _o.rotateX +"deg) rotateY(" + _o.rotateY +"deg)" );
+
+
+
+                    if( e.preventDefault )
+
+                    {
+
+                        e.preventDefault();
+
+                    };
+
+
+
+                    return false;
+
+                },
+
+
+
+                startMove : function startMove( obj )
+
+                {
+
+                    var _o = this;
+
+
+
+                    obj.timer = obj.timer || null;
+
+
+
+                    clearInterval( obj.timer );
+
+
+
+                    obj.timer = setInterval (function ()
+
+                    {
+
+                        _o.rotateX -= _o.speedY;
+
+                        _o.rotateY += _o.speedX;
+
+
+
+                        _o.speedY *= 0.93;
+
+                        _o.speedX *= 0.93;
+
+
+
+                        if( Math.abs( _o.speedX ) < 0.1 && Math.abs( _o.speedY ) < 0.1 )
+
+                        {
+
+                            _o.stopMove( obj.timer );
+
+                        };
+
+
+
+                        _o.transform( obj, "perspective(" + _o.perspective + "px) rotateX("+ _o.rotateX +"deg) rotateY(" + _o.rotateY +"deg)" );
+
+
+
+                    }, 30);
+
+                },
+
+
+
+                stopMove : function( t )
+
+                {
+
+                    clearInterval( t );
+
+                },
+
+
+
+                init : function()
+
+                {
+
+                    var _o = this;
+                    //这里只是吧a标签搞再一个数组中
+
+                    //这个是描述的html代码的数组；
+                    Aui.each( _o.desc, function( a )
+                    {
+                        _o.desc_arr.push(this);
+                    });
+                    Aui.each( _o.title, function( b )
+                    {
+                        var eme=_o.return_ele(_o.desc_id,_o.desc_arr);
+                        _o.desc_id++;
+                        str="<h1>"+this+"</h1>"+eme;
+                        _o.title_arr.push(str);
+                    });
+                    Aui.each( _o.links, function( c )
+                    {
+                        var eme=_o.return_ele(_o.title_id,_o.title_arr);
+                        _o.title_id++;
+                        str="<div class='box'><a href='"+this+"' target='_blank'>"+eme+"</a></div>"
+                        _o.link_arr.push(str);
+                    });
+
+
+//                    console.log(_o.link_arr);
+                    Aui.each( _o.path, function( i )
+                    {
+                        var eme=_o.return_ele(_o.link_id,_o.link_arr);
+                        _o.link_id++;
+                        var shadow = _o.piece( "linear-gradient(top, rgb(0, 0, 0) 50%, rgba(255, 255, 255, 0)), url(" + this + ");", "background-image" ),
+
+                            shadow = "<div class=\"over\" style=\"" + shadow + "\"></div>";
+                        _o.domStr += "<dd style=\"background-image:url("+ this +");\">" + shadow + eme + "</dd>";
+                    });
+                    Aui( _o.stage ).html( _o.domStr );
+
+                    var _oList = Aui( "dd",  _o.stage ),
+
+                        _sLen = _o.path.length,
+
+                        _deg = 360/_sLen,
+
+                        _tranZ = ( _o.width/2 + 40 ) / Math.tan( ( 360/_sLen/2 ) * Math.PI / 180 ),
+                        _i = _sLen;
+                    while( _i > 0 )
+
+                    {
+
+                        ( function( d, len, _oList, _o )
+
+                        {
+
+                            setTimeout( function()
+
+                            {
+
+                                var idx = len - d,
+
+                                    oThis = _oList[ idx ]
+
+
+
+                                oThis.children[0].style.opacity = 0.2;
+
+
+
+                                _o.transform( oThis, "rotateY(" + ( idx*_deg ) +"deg) translateZ(" + _tranZ + "px)" );
+
+
+
+                            }, d * 200 );
+
+
+
+                        })( _i-- , _sLen, _oList, _o );
+
+                    };
+
+
+
+                    var wheel = function( e )
+
+                    {
+
+                        _o.onMouseWheel.call( _o, e || window.event );
+
+                    };
+
+
+
+                    _o.addEvent( _o.oDoc, "mousewheel", wheel );
+
+                    _o.addEvent( _o.oDoc, "DOMMouseScroll", wheel );
+
+
+
+                    var AuiDoc = Aui( _o.oDoc );
+
+
+
+                    AuiDoc.mousedown( function( e )
+
+                    {
+
+                        var moveX = e.clientX,
+
+                            moveY = e.clientY;
+
+
+
+                        var startX = _o.rotateX;
+
+                        var startY = _o.rotateY;
+
+
+
+                        var lastX = moveX;
+
+                        var lastY = moveY;
+
+
+
+                        _o.speedX = _o.speedY = 0;
+
+
+
+                        AuiDoc.mousemove( function( e )
+
+                        {
+
+                            var x = e.screenX,
+
+                                y = e.screenY;
+
+
+
+                            _o.rotateY = startY + ( e.clientX - moveX )/10;
+
+                            _o.rotateX = startX - ( e.clientY - moveY )/10;
+
+
+
+                            _o.transform( _o.stage[0], "perspective("+ _o.perspective +"px) rotateX("+ _o.rotateX +"deg) rotateY(" + _o.rotateY +"deg)" );
+
+
+
+                            _o.speedX =( e.clientX - lastX )/5;
+
+
+
+                            _o.speedY =( e.clientY - lastY )/5;
+
+
+
+                            lastX = e.clientX;
+
+                            lastY = e.clientY;
+
+
+
+                        });
+
+
+
+                        AuiDoc.mouseup( function()
+
+                        {
+
+                            this.onmousemove = null;
+
+
+
+                            this.onmouseup = null;
+
+
+
+                            _o.startMove( _o.stage[0] );
+
+                        });
+
+
+
+                        _o.stopMove( _o.stage[0].timer );
+
+
+
+                        return false;
+
+                    } );
+
+
+
+                    return _o;
+
+                }
+
+
+
+            };
+
+            return new _3Deffect( a, w, h, s, p, x, y,l,t,d );
+
+        };
+
+
+
+        Aui.ready( function()
+
+        {
+
+            if( /ie/g.test( Aui.browser() ) )
+
+            {
+
+                Aui("body").html("Adam CSS 3.0 effect，支持非IE浏览器。你懂的！")
+
+                    .setStyle(
+
+                        {
+
+                            "color" : "#fff",
+
+                            "text-align" : "center",
+
+                            "font-size" : "50px",
+
+                            "font-weight" : "bolder",
+
+                            "line-height" : "500px"
+
+                        });
+
+            }
+
+            else
+
+            {
+
+                Effect(
+
+                    lists._src,
+                    200,
+
+                    300,
+
+                    Aui.byID("#stage"),
+
+                    2000,
+
+                    -10,
+
+                    0,
+                    lists._herf,
+                    lists._title,
+                    lists._des
+
+
+                ).init();
+
+            };
+
+        });
+
+    </script>
+
+</head>
+
+
+
+<body>
+
+
+
+<dl id="stage"></dl>
+
+
+
+</body>
+
+</html>
+
