@@ -1,0 +1,865 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="canvas,h5," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/blog/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="本篇讲述如何用canvas实现九宫格解锁">
+<meta name="keywords" content="canvas,h5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用canvas绘制九宫格解锁">
+<meta property="og:url" content="https://liqiangzhao.github.io/使用canvas绘制九宫格解锁/index.html">
+<meta property="og:site_name" content="Blend-Zlq">
+<meta property="og:description" content="本篇讲述如何用canvas实现九宫格解锁">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://liqiangzhao.github.io/blog/images/canvas.jpg">
+<meta property="og:image" content="https://liqiangzhao.github.io/blog/images/canvas2.jpg">
+<meta property="og:image" content="https://liqiangzhao.github.io/blog/images/canvas3.jpg">
+<meta property="og:updated_time" content="2017-11-30T05:58:02.007Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用canvas绘制九宫格解锁">
+<meta name="twitter:description" content="本篇讲述如何用canvas实现九宫格解锁">
+<meta name="twitter:image" content="https://liqiangzhao.github.io/blog/images/canvas.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://liqiangzhao.github.io/使用canvas绘制九宫格解锁/"/>
+
+
+
+
+
+  <title>使用canvas绘制九宫格解锁 | Blend-Zlq</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Blend-Zlq</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">春风十里</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/blog/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://liqiangzhao.github.io/blog/使用canvas绘制九宫格解锁/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liqiang Zhao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/headers.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blend-Zlq">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                使用canvas绘制九宫格解锁
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-08T11:34:08+08:00">
+                2017-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/blog/使用canvas绘制九宫格解锁/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="使用canvas绘制九宫格解锁/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本篇讲述如何用canvas实现九宫格解锁<br><a id="more"></a></p>
+<h2 id="概括"><a href="#概括" class="headerlink" title="概括"></a>概括</h2><p> canvas是 HTML5 新增的元素，可使用JavaScript脚本来绘制图形。例如：画图，合成照片，创建动画甚至实时视频处理与渲染。</p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><h3 id="html"><a href="#html" class="headerlink" title="html"></a>html</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;canvas id=&quot;canvas&quot; width=&quot;150&quot; height=&quot;150&quot;&gt;&lt;/canvas&gt;</span><br></pre></td></tr></table></figure>
+<blockquote><p>注意：这个宽高写在行内 跟通过id，class来控制宽高是不一样的。</p>
+</blockquote>
+<h3 id="javscript"><a href="#javscript" class="headerlink" title="javscript"></a>javscript</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var canvas = document.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line">var ctx = canvas.getContext(<span class="string">"2d"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="方法（基本操作）"><a href="#方法（基本操作）" class="headerlink" title="方法（基本操作）"></a>方法（基本操作）</h2><p>所有的方法都是ctx身上的方法</p>
+<p>示例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ctx.beginPath();</span><br><span class="line">ctx.moveTo(75,50);</span><br><span class="line">ctx.lineTo(100,75);</span><br><span class="line">ctx.lineTo(100,25);</span><br><span class="line">ctx.fillStyle = <span class="string">"rgba(255,0,0,0.5)"</span>;</span><br><span class="line">ctx.fill();</span><br><span class="line">closePath()</span><br></pre></td></tr></table></figure></p>
+<blockquote><p>坐标：左上点为园点，x为从左到右依次递增，y为从上到下依次递增</p>
+</blockquote>
+<p>设置样式<br><figure class="highlight plain"><figcaption><span>设置图形的填充颜色</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fillStyle = color</span><br></pre></td></tr></table></figure><br><figure class="highlight plain"><figcaption><span>设置图形轮廓的颜色</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strokeStyle = color</span><br></pre></td></tr></table></figure><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 这些 fillStyle 的值均为 <span class="string">'橙色'</span></span><br><span class="line">fillStyle = <span class="string">"orange"</span>;</span><br><span class="line">fillStyle = <span class="string">"#FFA500"</span>;</span><br><span class="line">fillStyle = <span class="string">"rgb(255,165,0)"</span>;</span><br><span class="line">fillStyle = <span class="string">"rgba(255,165,0,0.5)"</span>;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><figcaption><span>设置线宽</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctx.lineWidth = 3</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><figcaption><span>新建一条路径，生成之后，图形绘制命令被指向到路径上生成路径</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">beginPath()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><figcaption><span>闭合路径之后图形绘制命令又重新指向到上下文中。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">closePath()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><figcaption><span>抬起笔尖移动到-</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">moveTo(x,y);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><figcaption><span>路径从上一个位置移动到-</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lineTo(x,y);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><figcaption><span>通过线条来绘制图形轮廓。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stroke()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><figcaption><span>通过填充路径的内容区域生成实心的图形。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fill()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><figcaption><span>绘制一个填充的矩形</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fillRect(x, y, width, height)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><figcaption><span>绘制一个矩形的边框</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strokeRect(x, y, width, height)</span><br></pre></td></tr></table></figure>
+<p>绘制一个圆<br><figure class="highlight plain"><figcaption><span>画一个以（x,y）为圆心的以radius为半径的圆弧（圆），从startAngle开始到endAngle结束，按照anticlockwise给定的方向（默认为顺时针）来生成。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arc(x, y, radius, startAngle, endAngle, anticlockwise)</span><br></pre></td></tr></table></figure><br><figure class="highlight plain"><figcaption><span>根据给定的控制点和半径画一段圆弧，再以直线连接两个控制点。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arcTo(x1, y1, x2, y2, radius)</span><br></pre></td></tr></table></figure><br><blockquote><p>注意：这里的角度只能以Math.PI算，Math.PI==180度；</p>
+</blockquote><br><figure class="highlight plain"><figcaption><span>清除指定矩形区域，让清除部分完全透明</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clearRect(x, y, width, height)</span><br></pre></td></tr></table></figure><br><blockquote><p>这里的清除，是指清除到背景色。如果你通过ID，CLASS设置了canvas的背景色，那么，清理后会显示你设置的背景色的；</p>
+</blockquote><br>多加练习以后上边提到的方法后我们就可以实现我们的九宫格解锁了</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;canvas id=&quot;canvas&quot; width=&quot;300px&quot; height=&quot;300px&quot;&gt;&lt;/canvas&gt;</span><br></pre></td></tr></table></figure><br>javascript<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var canvas=document.getElementById(&quot;canvas&quot;);</span><br><span class="line">var ctx = canvas.getContext(&quot;2d&quot;);</span><br><span class="line">ctx.lineWidth = 3;</span><br><span class="line">ctx.fillStyle=&quot;#000&quot;;</span><br><span class="line">ctx.fillRect(0,0,300,300);</span><br><span class="line">ctx.clearRect(0,0,300,300);	</span><br></pre></td></tr></table></figure><br><blockquote><p>在开始之前，我们先想一下，我们需要做什么，一个九宫格。肯定需要九个圆，九个圆心；所以我们先获取一下这9个圆的圆心；</p>
+</blockquote><br>先获取cnavas的宽高,然后计算得出3个中点，通过中点，得到9个圆的圆心的坐标，这里的flag稍后会解释。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">arr=[50.5,150.5,250.5]; //这是那3个中点</span><br><span class="line">var data=[]; </span><br><span class="line"><span class="keyword">for</span>(var i=0;i&lt;arr.length;i++)&#123;</span><br><span class="line">	<span class="keyword">for</span>(var j=0;j&lt;arr.length;j++)&#123;㥐</span><br><span class="line">		var obj=&#123;x:arr[j],y:arr[i],flag:<span class="literal">false</span>&#125;</span><br><span class="line">		data.push(obj)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里的data就是九个圆心的坐标，接下来我们是需要画圆，这里先封装一个画圆的函数。通过flag来判断是画实心圆跟空心圆这里的flag跟上边的flag是不一样的。</p>
+<h3 id="画圆函数"><a href="#画圆函数" class="headerlink" title="画圆函数"></a>画圆函数</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> rend_arc(x,y,r,flag,color)&#123;</span><br><span class="line">		ctx.beginPath();</span><br><span class="line">		ctx.strokeStyle = color;</span><br><span class="line">		ctx.fillStyle=color;</span><br><span class="line">		ctx.arc(x,y, r, 0, Math.PI * 2, <span class="literal">true</span>);</span><br><span class="line">		<span class="keyword">if</span>(!flag)&#123;</span><br><span class="line">			ctx.stroke();</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			ctx.fill();</span><br><span class="line">		&#125;</span><br><span class="line">		ctx.closePath();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>之后我们需要调用这个函数画9个圆。为了逼真，我们画了大圆跟小圆,这里画了10半径的实心圆跟30半径的空心圆。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(var i=0;i&lt;data.length;i++)&#123;</span><br><span class="line">	rend_arc(data[i].x,data[i].y,10,<span class="literal">true</span>,<span class="string">"red"</span>)</span><br><span class="line">	rend_arc(data[i].x,data[i].y,30,<span class="literal">false</span>,<span class="string">"red"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里我们的页面中就会有九个圆在了:<br><img src="/blog/images/canvas.jpg" width="300" height="300" title="canvas"></p>
+<h3 id="手指触摸事件"><a href="#手指触摸事件" class="headerlink" title="手指触摸事件"></a>手指触摸事件</h3><p>接下来我们就需要手指触摸事件<br>我先介绍一下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touchstart（触摸开始）    touchmove （触摸移动） touchend （抬起手指）</span><br></pre></td></tr></table></figure></p>
+<h3 id="触摸开始"><a href="#触摸开始" class="headerlink" title="触摸开始"></a>触摸开始</h3><p>触摸开始的时候，我们需要先判断是否在哪一个点上，如果不是在任何一个点上，说明这次触摸不起作用;<br>首先我们假设他开始点击，就把第一个圆变成红色的点中状态；<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#canvas"</span>).on(<span class="string">"touchstart"</span>,<span class="keyword">function</span>(e)&#123;</span><br><span class="line">	ctx.clearRect(0,0,300,300);   //先清理，再重新绘制；</span><br><span class="line">	data[0].flag=<span class="literal">false</span>; 		//这里我们把按钮1的状态变成被选中</span><br><span class="line">	<span class="keyword">for</span>(var i=0;i&lt;data.length;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(data[i].flag)&#123;</span><br><span class="line">			rend_arc(data[i].x,data[i].y,10,<span class="literal">true</span>,<span class="string">"red"</span>)</span><br><span class="line">			rend_arc(data[i].x,data[i].y,30,<span class="literal">false</span>,<span class="string">"red"</span>)	</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			rend_arc(data[i].x,data[i].y,10,<span class="literal">true</span>,<span class="string">"#000"</span>)</span><br><span class="line">			rend_arc(data[i].x,data[i].y,30,<span class="literal">false</span>,<span class="string">"#000"</span>)	</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;		</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<blockquote><p>在这里你就知道了 data 的 flag 是来判断每一个点的是否被点击过;因为在上边我们改变了data[0].flag=true ，也就是说把第一个点变的选中了。渲染出来就是如图</p>
+</blockquote>
+<img src="/blog/images/canvas2.jpg" width="300" height="300" title="canvas">
+<h3 id="触摸移动"><a href="#触摸移动" class="headerlink" title="触摸移动"></a>触摸移动</h3><p>接下来我们在手指移动过程中，把页面重回，在加上当前点的位置，就变成动态的移动了，我们写move事件,这里手机端的触摸事件的事件源的坐标是在<br>e.originalEvent.changedTouches[0]身上的。</p>
+<p>我们先写一个函数，就是绘制这个当前的点的位置跟已经点击过的位置；<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var zuobiao=[];		//就是鼠标滑过的点的坐标这里我们先把第一个点放进去；</span><br><span class="line">zuobiao.push(dian)  //在start的时候，把dian变成0;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//move 的时候要每秒重绘 </span><br><span class="line">	<span class="keyword">function</span> send_fill(x,y)&#123;</span><br><span class="line">		make_arc();	//画圆;</span><br><span class="line">		ctx.beginPath()</span><br><span class="line">		ctx.strokeStyle = <span class="string">"red"</span>;</span><br><span class="line">		ctx.moveTo(data[zuobiao[0]].x,data[zuobiao[0]].y);//将画笔移到x0,y0处</span><br><span class="line">		<span class="keyword">for</span>(var n=1;n&lt;zuobiao.length;n++)&#123;</span><br><span class="line">			ctx.lineTo(data[zuobiao[n]].x,data[zuobiao[n]].y);//将画笔移到x0,y0处</span><br><span class="line">		&#125;</span><br><span class="line">		ctx.lineTo(x,y);//从x0,y0到x1,y1画一条线</span><br><span class="line">		ctx.stroke();//画线</span><br><span class="line">		ctx.closePath();</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//move 函数</span><br><span class="line">$(<span class="string">"#canvas"</span>).on(<span class="string">"touchmove"</span>,<span class="keyword">function</span>(e)&#123;</span><br><span class="line">		var _e=e.originalEvent.changedTouches[0];</span><br><span class="line">		var x=_e.pageX;</span><br><span class="line">		var y=_e.pageY;</span><br><span class="line">		var l=$(<span class="string">"canvas"</span>).offset().left;</span><br><span class="line">		var t=$(<span class="string">"canvas"</span>).offset().top;</span><br><span class="line">		send_fill(x<span class="_">-l</span>,y-t);		//这里传过去的x，y就是当前手指的位置；</span><br><span class="line">	&#125;)</span><br></pre></td></tr></table></figure>
+<p>这样之后，在move 的时候效果就会如图所示：<br><img src="/blog/images/canvas3.jpg" width="300" height="300" title="canvas"><br>大家思考一下，到了这一步，我们所缺的就是一个判断而已；就是判断当前的位置在哪一个点的范围内。把哪一个点的flag变成true就好；<br>接下来我们实现这一步</p>
+<h4 id="判断范围"><a href="#判断范围" class="headerlink" title="判断范围"></a>判断范围</h4><blockquote><p>我们先判断一个大范围。就是说目前这个点在哪个区域里面<br>计算是哪个点开始点击的； 返回一个点的id<br>这里面的条件就是边界，0-100-200-300；</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="built_in">set</span>(x,y)&#123;</span><br><span class="line">	<span class="keyword">if</span>(x&gt;0&amp;&amp;x&lt;100)&#123;</span><br><span class="line">		<span class="keyword">if</span>(y&gt;0&amp;&amp;y&lt;100)&#123;</span><br><span class="line">			<span class="built_in">return</span> 0;</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(y&gt;100&amp;&amp;y&lt;200)&#123;</span><br><span class="line">			<span class="built_in">return</span> 3;</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(y&gt;200&amp;&amp;y&lt;300)&#123;</span><br><span class="line">			<span class="built_in">return</span> 6;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>(x&gt;100&amp;&amp;x&lt;200)&#123;</span><br><span class="line">		<span class="keyword">if</span>(y&gt;0&amp;&amp;y&lt;100)&#123;</span><br><span class="line">			<span class="built_in">return</span> 1;</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(y&gt;100&amp;&amp;y&lt;200)&#123;</span><br><span class="line">			<span class="built_in">return</span> 4;</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(y&gt;200&amp;&amp;y&lt;300)&#123;</span><br><span class="line">			<span class="built_in">return</span> 7;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>(x&gt;200&amp;&amp;x&lt;300)&#123;</span><br><span class="line">		<span class="keyword">if</span>(y&gt;0&amp;&amp;y&lt;100)&#123;</span><br><span class="line">			<span class="built_in">return</span> 2;</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(y&gt;100&amp;&amp;y&lt;200)&#123;</span><br><span class="line">			<span class="built_in">return</span> 5;</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(y&gt;200&amp;&amp;y&lt;300)&#123;</span><br><span class="line">			<span class="built_in">return</span> 8;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">return</span> 10;  //这里写10的原因是我<span class="literal">false</span>。在另一个函数判断的时候。返回0也是<span class="literal">false</span>。所以就换成10</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="判断是否在圆范围"><a href="#判断是否在圆范围" class="headerlink" title="判断是否在圆范围"></a>判断是否在圆范围</h4><p>通过这个我们可以判断出一个大范围；接下来我们更加精密的判断一个小范围<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//这个的精密判断在圆的里面；</span><br><span class="line"><span class="keyword">function</span> set_arc(x,y)&#123;</span><br><span class="line">	var num=<span class="built_in">set</span>(x,y)</span><br><span class="line">	<span class="keyword">if</span>(num!=10)&#123;</span><br><span class="line">		var a=data[num].x;</span><br><span class="line">		var b=data[num].y;</span><br><span class="line">		<span class="keyword">if</span>(Math.abs(x<span class="_">-a</span>)&lt;30&amp;&amp;Math.abs(y-b)&lt;30)&#123;</span><br><span class="line">			//在里</span><br><span class="line">			<span class="built_in">return</span> num;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="built_in">return</span> 10;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里我们判断出了大的范围。并且说这个是！==10,意思就是手指的触摸点是在canvas上，<br>这里我们换一种想法来思考。<br>我们前边画的圆的半径是30，那么就是说从这个圆的圆心开始，x|y +30或者-30 就是每个圆的边界,换句话说这就是范围；<br>我们用当前触摸点的x，y通过set（）获取一个大的范围，在这个大范围内。我们再判断。 data[set()].x,data[set()].y 跟我们现在的x，y相减一下。如果是在30范围内。这里我用Math.abs()取正一下。这个数&lt;30. 那么就说明是在这个点内。<br>我们就可以把这个点的data[点].flag=true;</p>
+<h3 id="触摸停止"><a href="#触摸停止" class="headerlink" title="触摸停止"></a>触摸停止</h3><blockquote><p>鼠标抬起就更好了；把这个canavs清空重绘就好；或者显示，都可以安你的需求来。，这里我选择的是重绘</p>
+</blockquote>
+<h2 id="全部代码"><a href="#全部代码" class="headerlink" title="全部代码"></a>全部代码</h2><p>我们把代码概括一下；<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br></pre></td><td class="code"><pre><span class="line">var canvas=document.getElementById(<span class="string">"canvas"</span>);  //得到一个canavs对象</span><br><span class="line">	var ctx = canvas.getContext(<span class="string">"2d"</span>);				//得到一个2d画笔</span><br><span class="line">	ctx.lineWidth = 3;								//设置线宽</span><br><span class="line">	ctx.fillStyle=<span class="string">"#000"</span>;                          //设置画笔的颜色</span><br><span class="line">	ctx.fillRect(0,0,300,300);						//这个是清除到原来的默认颜色；并不是透明色</span><br><span class="line">	ctx.clearRect(0,0,300,300);						// 清理一块坐标内的内容</span><br><span class="line">	// 这是中心的中心</span><br><span class="line">	var arr=[50.5,150.5,250.5];</span><br><span class="line"></span><br><span class="line">	var data=[];  //  最初的9个圆心的坐标</span><br><span class="line">	<span class="keyword">for</span>(var i=0;i&lt;arr.length;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(var j=0;j&lt;arr.length;j++)&#123;</span><br><span class="line">			var obj=&#123;x:arr[j],y:arr[i],flag:<span class="literal">false</span>&#125;</span><br><span class="line">			data.push(obj)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	var zuobiao=[];		//就是鼠标滑过的点的坐标 					</span><br><span class="line">	make_arc();	//画圆点</span><br><span class="line">	<span class="keyword">function</span> <span class="function"><span class="title">make_arc</span></span>()&#123;</span><br><span class="line">		ctx.clearRect(0,0,300,300);	//清空 </span><br><span class="line">		<span class="keyword">for</span>(var i=0;i&lt;data.length;i++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(data[i].flag)&#123;</span><br><span class="line">				rend_arc(data[i].x,data[i].y,10,<span class="literal">true</span>,<span class="string">"red"</span>)</span><br><span class="line">				rend_arc(data[i].x,data[i].y,30,<span class="literal">false</span>,<span class="string">"red"</span>)</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				rend_arc(data[i].x,data[i].y,10,<span class="literal">true</span>,<span class="string">"#000"</span>)</span><br><span class="line">				rend_arc(data[i].x,data[i].y,30,<span class="literal">false</span>,<span class="string">"#000"</span>)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;;</span><br><span class="line">	//画圆的函数</span><br><span class="line">	<span class="keyword">function</span> rend_arc(x,y,r,flag,color)&#123;</span><br><span class="line">		ctx.beginPath();</span><br><span class="line">		ctx.strokeStyle = color;</span><br><span class="line">		ctx.fillStyle=color;</span><br><span class="line">		ctx.arc(x,y, r, 0, Math.PI * 2, <span class="literal">true</span>);</span><br><span class="line">		<span class="keyword">if</span>(!flag)&#123;</span><br><span class="line">			ctx.stroke();</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			ctx.fill();</span><br><span class="line">		&#125;</span><br><span class="line">		ctx.closePath();</span><br><span class="line">	&#125;</span><br><span class="line">	var   me_f=<span class="literal">false</span>; //判断第一次就点到点上了，如果没有move的时候就不执行</span><br><span class="line">	$(<span class="string">"#canvas"</span>).on(<span class="string">"touchstart"</span>,<span class="keyword">function</span>(e)&#123;</span><br><span class="line">		me_f=<span class="literal">false</span>;</span><br><span class="line">		$(<span class="string">"h1"</span>).html(<span class="string">"请输入密码"</span>);</span><br><span class="line">		var _e=e.originalEvent.changedTouches[0];</span><br><span class="line">		var x=_e.pageX;</span><br><span class="line">		var y=_e.pageY;</span><br><span class="line">		var l=$(<span class="string">"canvas"</span>).offset().left;</span><br><span class="line">		var t=$(<span class="string">"canvas"</span>).offset().top;</span><br><span class="line">		var num=set_arc(x<span class="_">-l</span>,y-t)+1;</span><br><span class="line">		<span class="keyword">if</span>(num!=11&amp;&amp;num)&#123;</span><br><span class="line">			num=num-1;</span><br><span class="line">			me_f=<span class="literal">true</span>;</span><br><span class="line">			//放弃清理原来的了。。总是清理的有点多</span><br><span class="line">			// ctx.clearRect(data[num].x-50.5,data[num].y-50.5,data[num].x+49.5,data[num].y+49.5);</span><br><span class="line">			data[num].flag=<span class="literal">true</span>;</span><br><span class="line">			zuobiao.push(num);</span><br><span class="line">			rend_arc(data[num].x,data[num].y,10,<span class="literal">true</span>,<span class="string">"red"</span>)</span><br><span class="line">			rend_arc(data[num].x,data[num].y,30,<span class="literal">false</span>,<span class="string">"red"</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">	$(<span class="string">"#canvas"</span>).on(<span class="string">"touchmove"</span>,<span class="keyword">function</span>(e)&#123;</span><br><span class="line">		<span class="keyword">if</span>(!me_f)&#123;</span><br><span class="line">			<span class="built_in">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		var _e=e.originalEvent.changedTouches[0];</span><br><span class="line">		var x=_e.pageX;</span><br><span class="line">		var y=_e.pageY;</span><br><span class="line">		var l=$(<span class="string">"canvas"</span>).offset().left;</span><br><span class="line">		var t=$(<span class="string">"canvas"</span>).offset().top;</span><br><span class="line">		send_fill(x<span class="_">-l</span>,y-t);</span><br><span class="line">		//这里是要判断  经过的点；</span><br><span class="line">		var dian=set_arc(x<span class="_">-l</span>,y-t)+1;</span><br><span class="line">		// var dian=<span class="built_in">set</span>(x<span class="_">-l</span>,y-t);</span><br><span class="line">		<span class="keyword">if</span>(dian!=11)&#123;</span><br><span class="line">			<span class="keyword">if</span>(dian)&#123;</span><br><span class="line">				dian=dian-1;</span><br><span class="line">			/*	console.log(dian)</span><br><span class="line">				<span class="built_in">return</span>;*/</span><br><span class="line">				<span class="keyword">if</span>(!data[dian].flag)&#123;</span><br><span class="line">					data[dian].flag=<span class="literal">true</span>;</span><br><span class="line">					zuobiao.push(dian);</span><br><span class="line">				&#125;	</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">		&#125;;</span><br><span class="line">	&#125;)</span><br><span class="line">	//move 的时候要每秒重绘</span><br><span class="line">	<span class="keyword">function</span> send_fill(x,y)&#123;</span><br><span class="line">		make_arc();	//画圆;</span><br><span class="line">		ctx.beginPath()</span><br><span class="line">		ctx.strokeStyle = <span class="string">"red"</span>;</span><br><span class="line">		// ctx.moveTo(data[zuobiao[0]].x,data[zuobiao[0]].y);//将画笔移到x0,y0处</span><br><span class="line">		ctx.moveTo(data[zuobiao[0]].x,data[zuobiao[0]].y);//将画笔移到x0,y0处</span><br><span class="line">		<span class="keyword">for</span>(var n=1;n&lt;zuobiao.length;n++)&#123;</span><br><span class="line">			ctx.lineTo(data[zuobiao[n]].x,data[zuobiao[n]].y);//将画笔移到x0,y0处</span><br><span class="line">		&#125;</span><br><span class="line">		 ctx.lineTo(x,y);//从x0,y0到x1,y1画一条线</span><br><span class="line">		// ctx.fill();//填充</span><br><span class="line">		ctx.stroke();//画线</span><br><span class="line">		ctx.closePath();</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	//end 的时候。。所有的值要恢复原值；判断 重置。</span><br><span class="line">	$(<span class="string">"#canvas"</span>).on(<span class="string">"touchend"</span>,<span class="keyword">function</span>(e)&#123;</span><br><span class="line">		<span class="keyword">if</span>(!me_f)&#123;</span><br><span class="line">			<span class="built_in">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		panduan(zuobiao);</span><br><span class="line">		zuobiao=[];</span><br><span class="line">		<span class="keyword">for</span>(var i=0;i&lt;data.length;i++)&#123;</span><br><span class="line">			data[i].flag=<span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		make_arc();	//画圆;</span><br><span class="line">	&#125;)</span><br><span class="line">		// 计算是哪个点开始点击的； 返回一个点的id</span><br><span class="line">	<span class="keyword">function</span> <span class="built_in">set</span>(x,y)&#123;</span><br><span class="line">		<span class="keyword">if</span>(x&gt;0&amp;&amp;x&lt;100)&#123;</span><br><span class="line">			<span class="keyword">if</span>(y&gt;0&amp;&amp;y&lt;100)&#123;</span><br><span class="line">				<span class="built_in">return</span> 0;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(y&gt;100&amp;&amp;y&lt;200)&#123;</span><br><span class="line">				<span class="built_in">return</span> 3;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(y&gt;200&amp;&amp;y&lt;300)&#123;</span><br><span class="line">				<span class="built_in">return</span> 6;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(x&gt;100&amp;&amp;x&lt;200)&#123;</span><br><span class="line">			<span class="keyword">if</span>(y&gt;0&amp;&amp;y&lt;100)&#123;</span><br><span class="line">				<span class="built_in">return</span> 1;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(y&gt;100&amp;&amp;y&lt;200)&#123;</span><br><span class="line">				<span class="built_in">return</span> 4;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(y&gt;200&amp;&amp;y&lt;300)&#123;</span><br><span class="line">				<span class="built_in">return</span> 7;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(x&gt;200&amp;&amp;x&lt;300)&#123;</span><br><span class="line">			<span class="keyword">if</span>(y&gt;0&amp;&amp;y&lt;100)&#123;</span><br><span class="line">				<span class="built_in">return</span> 2;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(y&gt;100&amp;&amp;y&lt;200)&#123;</span><br><span class="line">				<span class="built_in">return</span> 5;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(y&gt;200&amp;&amp;y&lt;300)&#123;</span><br><span class="line">				<span class="built_in">return</span> 8;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">return</span> 10;</span><br><span class="line">	&#125;</span><br><span class="line">	var cir=[];  //每一个点的位置的大小，，也就是每一个圆的大小；</span><br><span class="line">	<span class="keyword">for</span>(var i=0;i&lt;data.length;i++)&#123;</span><br><span class="line">		var obj=&#123;&#125;</span><br><span class="line">		obj.max_w=data[i].x+30;</span><br><span class="line">		obj.min_w=data[i].x-30;</span><br><span class="line">		obj.max_h=data[i].y+30;</span><br><span class="line">		obj.min_h=data[i].y-30;</span><br><span class="line">		cir.push(obj);</span><br><span class="line">	&#125;</span><br><span class="line">	//这个的精密判断在圆的里面；</span><br><span class="line">	<span class="keyword">function</span> set_arc(x,y)&#123;</span><br><span class="line">		var num=<span class="built_in">set</span>(x,y)</span><br><span class="line">		<span class="keyword">if</span>(num!=10)&#123;</span><br><span class="line">			var a=data[num].x;</span><br><span class="line">			var b=data[num].y;</span><br><span class="line">			<span class="keyword">if</span>(Math.abs(x<span class="_">-a</span>)&lt;30&amp;&amp;Math.abs(y-b)&lt;30)&#123;</span><br><span class="line">				//在里</span><br><span class="line">				<span class="built_in">return</span> num;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="built_in">return</span> 10;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在这里我详细讲述了如何用canavs来实现九宫格解锁的功能。可能比较乱，大家多多包涵。不过内容比较详细，所用的方法也是新手易懂的。<br>在我的<a href="https://liqiangzhao.github.io/canvas">github</a>上有一个我用这个方法写的成功案例，如果需要可以参考一下.谢谢。<br><span id="busuanzi_container_page_pv"><br>  本文总阅读量<span id="busuanzi_value_page_pv"></span>次<br></span></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/blog/images/weixin.png" alt="Liqiang Zhao WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/blog/images/zhifubao.jpg" alt="Liqiang Zhao Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/canvas/" rel="tag"># canvas</a>
+          
+            <a href="/blog/tags/h5/" rel="tag"># h5</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/meta标签详解/" rel="next" title="meta标签详解">
+                <i class="fa fa-chevron-left"></i> meta标签详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/地址栏回车后发生了什么/" rel="prev" title="地址栏回车后发生了什么">
+                地址栏回车后发生了什么 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/blog/images/headers.jpg"
+               alt="Liqiang Zhao" />
+          <p class="site-author-name" itemprop="name">Liqiang Zhao</p>
+           
+              <p class="site-description motion-element" itemprop="description">这个年纪放弃梦想太年轻了不是吗</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/blog/">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/blog/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/blog/tags/index.html">
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/liqiangzhao" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/5349718021/home" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.baidu.com" target="_blank" title="Baidu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Baidu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=25867002&auto=0&height=66"></iframe>
+      </section>
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概括"><span class="nav-number">1.</span> <span class="nav-text">概括</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用法"><span class="nav-number">2.</span> <span class="nav-text">用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#html"><span class="nav-number">2.1.</span> <span class="nav-text">html</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#javscript"><span class="nav-number">2.2.</span> <span class="nav-text">javscript</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法（基本操作）"><span class="nav-number">3.</span> <span class="nav-text">方法（基本操作）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">4.</span> <span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#画圆函数"><span class="nav-number">4.1.</span> <span class="nav-text">画圆函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#手指触摸事件"><span class="nav-number">4.2.</span> <span class="nav-text">手指触摸事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#触摸开始"><span class="nav-number">4.3.</span> <span class="nav-text">触摸开始</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#触摸移动"><span class="nav-number">4.4.</span> <span class="nav-text">触摸移动</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#判断范围"><span class="nav-number">4.4.1.</span> <span class="nav-text">判断范围</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判断是否在圆范围"><span class="nav-number">4.4.2.</span> <span class="nav-text">判断是否在圆范围</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#触摸停止"><span class="nav-number">4.5.</span> <span class="nav-text">触摸停止</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全部代码"><span class="nav-number">5.</span> <span class="nav-text">全部代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+本站总访问量<span id="busuanzi_value_site_pv"></span>次
+<br/>
+您是第<span id="busuanzi_value_site_uv"></span>个访问本站的小伙伴
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liqiang Zhao</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+  
+    <script type="text/javascript">
+    /*var rew=document.body.clientWidth;
+         var ewq=parseInt(rew/19);
+         // 这里的屏幕不一样对应的canvas上的点的数量也不一样
+        document.write(' <script type="text/javascript" color="38,42,48" opacity="0.7" zIndex="-2"  count="'+ewq+'" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js" > <script>')*/
+  </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+  
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysXVglHN';
+      var conf = 'aaa296b741b455f0fb72814196a0e914';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

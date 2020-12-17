@@ -1,0 +1,976 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="前端,sass," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/blog/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="本篇主要介绍sass的安装以及语法跟使用">
+<meta name="keywords" content="前端,sass">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用SASS">
+<meta property="og:url" content="https://liqiangzhao.github.io/使用SASS/index.html">
+<meta property="og:site_name" content="Blend-Zlq">
+<meta property="og:description" content="本篇主要介绍sass的安装以及语法跟使用">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-05-03T02:17:10.405Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用SASS">
+<meta name="twitter:description" content="本篇主要介绍sass的安装以及语法跟使用">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://liqiangzhao.github.io/使用SASS/"/>
+
+
+
+
+
+  <title>使用SASS | Blend-Zlq</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Blend-Zlq</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">春风十里</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/blog/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://liqiangzhao.github.io/blog/使用SASS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liqiang Zhao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/headers.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blend-Zlq">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                使用SASS
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-02T15:33:03+08:00">
+                2017-05-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/blog/使用SASS/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="使用SASS/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本篇主要介绍sass的安装以及语法跟使用<br><a id="more"></a></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote><p>Sass 是一种css预处理器,CSS 预处理器定义了一种新的语言，其基本思想是，用一种专门的编程语言，为 CSS 增加了一些编程的特性，将 CSS 作为目标生成文件，然后开发者就只要使用这种语言进行编码工作。</p>
+</blockquote>
+<blockquote class="pullquote"><p>除了sass还有一些其他常见的预处理语言</p>
+<ol>
+<li><a href="http://lesscss.cn/" target="_blank" rel="noopener">LESS</a></li>
+<li><a href="https://www.oschina.net/p/stylus" target="_blank" rel="noopener">Stylus</a></li>
+</ol>
+</blockquote>
+<blockquote class="pullquote"><p>Sass 有时候也被称为 SCSS,两者之间不同之处有以下两点：</p>
+<ol>
+<li>文件扩展名不同，Sass 是以“.sass”后缀为扩展名，而 SCSS 是以“.scss”后缀为扩展名</li>
+<li>语法书写方式不同，Sass 是以严格的缩进式语法规则来书写，不带大括号({})和分号(;)，而 SCSS 的语法书写和我们的 CSS 语法书写方式非常类似。</li>
+</ol>
+</blockquote>
+<p>来看一个示例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/* Sass 语法 */</span><br><span class="line"><span class="variable">$font</span>-stack: Helvetica, sans-serif</span><br><span class="line"><span class="variable">$primary</span>-color: <span class="comment">#333</span></span><br><span class="line">body</span><br><span class="line">  font: 100% <span class="variable">$font</span>-stack</span><br><span class="line">  color: <span class="variable">$primary</span>-color</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/* Scss 语法 */</span><br><span class="line"><span class="variable">$font</span>-stack: Helvetica, sans-serif;</span><br><span class="line"><span class="variable">$primary</span>-color: <span class="comment">#333;</span></span><br><span class="line">body &#123;</span><br><span class="line">  font: 100% <span class="variable">$font</span>-stack;</span><br><span class="line">  color: <span class="variable">$primary</span>-color;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote><p>编译出来的css</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">  font: 100% Helvetica, sans-serif;</span><br><span class="line">  color: <span class="comment">#333;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote><p>Tips:scss文件中可以完全像写正常的css那样去写.</p>
+</blockquote>
+<h2 id="Sass的安装"><a href="#Sass的安装" class="headerlink" title="Sass的安装"></a>Sass的安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g node-sass</span><br><span class="line">node-sass -w xxx.scss xxx.css --output-style expanded</span><br></pre></td></tr></table></figure>
+<blockquote><p>node-sass 参数:</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">-w, --watch                Watch a directory or file</span><br><span class="line">-r, --recursive            Recursively watch directories or files</span><br><span class="line">-o, --output               Output directory</span><br><span class="line">-x, --omit-source-map-url  Omit <span class="built_in">source</span> map URL comment from output</span><br><span class="line">-i, --indented-syntax      Treat data from stdin as sass code (versus scss)</span><br><span class="line">-q, --quiet                Suppress <span class="built_in">log</span> output except on error</span><br><span class="line">-v, --version              Prints version info</span><br><span class="line">--output-style             CSS output style (nested | expanded | compact | compressed)</span><br><span class="line">--indent-type              Indent <span class="built_in">type</span> <span class="keyword">for</span> output CSS (space | tab)</span><br><span class="line">--indent-width             Indent width; number of spaces or tabs (maximum value: 10)</span><br><span class="line">--linefeed                 Linefeed style (cr | crlf | lf | lfcr)</span><br><span class="line">--<span class="built_in">source</span>-comments          Include debug info <span class="keyword">in</span> output</span><br><span class="line">--<span class="built_in">source</span>-map               Emit <span class="built_in">source</span> map</span><br><span class="line">--<span class="built_in">source</span>-map-contents      Embed include contents <span class="keyword">in</span> map</span><br><span class="line">--<span class="built_in">source</span>-map-embed         Embed sourceMappingUrl as data URI</span><br><span class="line">--<span class="built_in">source</span>-map-root          Base path, will be emitted <span class="keyword">in</span> <span class="built_in">source</span>-map as is</span><br><span class="line">--include-path             Path to look <span class="keyword">for</span> imported files</span><br><span class="line">--follow                   Follow symlinked directories</span><br><span class="line">--precision                The amount of precision allowed <span class="keyword">in</span> decimal numbers</span><br><span class="line">--importer                 Path to .js file containing custom importer</span><br><span class="line">--<span class="built_in">functions</span>                Path to .js file containing custom <span class="built_in">functions</span></span><br><span class="line">--<span class="built_in">help</span>                     Print usage info</span><br></pre></td></tr></table></figure>
+<h2 id="Sass的基本特性"><a href="#Sass的基本特性" class="headerlink" title="Sass的基本特性"></a>Sass的基本特性</h2><h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$brand</span>-primary : darken(<span class="comment">#428bca, 6.5%) !default;</span></span><br><span class="line"><span class="variable">$btn</span>-primary-color : <span class="comment">#fff !default;</span></span><br><span class="line"><span class="variable">$btn</span>-primary-bg : <span class="variable">$brand</span>-primary !default;</span><br><span class="line"><span class="variable">$btn</span>-primary-border : darken(<span class="variable">$btn</span>-primary-bg, 5%) !default;</span><br><span class="line">.btn-primary &#123;</span><br><span class="line">   background-color: <span class="variable">$btn</span>-primary-bg;</span><br><span class="line">   color: <span class="variable">$btn</span>-primary-color;</span><br><span class="line">   border: 1px solid <span class="variable">$btn</span>-primary-border;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$baseLineHeight</span>: 2;</span><br><span class="line"><span class="variable">$baseLineHeight</span>: 1.5 !default;</span><br><span class="line">body&#123;</span><br><span class="line">    line-height: <span class="variable">$baseLineHeight</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/* 局部变量 */</span><br><span class="line"><span class="variable">$color</span>: orange !default;</span><br><span class="line">.block &#123;</span><br><span class="line">  color: <span class="variable">$color</span>;</span><br><span class="line">&#125;</span><br><span class="line">em &#123;</span><br><span class="line">  <span class="variable">$color</span>: red;</span><br><span class="line">  a &#123;</span><br><span class="line">    color: <span class="variable">$color</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">span &#123;</span><br><span class="line">  color: <span class="variable">$color</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="嵌套"><a href="#嵌套" class="headerlink" title="嵌套"></a>嵌套</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">nav &#123;</span><br><span class="line">  a &#123;</span><br><span class="line">    color: red;</span><br><span class="line">    header &amp; &#123;</span><br><span class="line">      color:green;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.box &#123;</span><br><span class="line">  border: &#123;</span><br><span class="line">   top: 1px solid red;</span><br><span class="line">   bottom: 1px solid green;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.clearfix&#123;</span><br><span class="line">  &amp;:before,</span><br><span class="line">  &amp;:after &#123;</span><br><span class="line">    content:<span class="string">""</span>;</span><br><span class="line">    display: table;</span><br><span class="line">  &#125;</span><br><span class="line">  &amp;:after &#123;</span><br><span class="line">    clear:both;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote><p>不要无节制嵌套,一切都根据实际情况判断</p>
+</blockquote>
+<h3 id="混合宏"><a href="#混合宏" class="headerlink" title="混合宏"></a>混合宏</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@mixin border-radius&#123;</span><br><span class="line">  -webkit-border-radius: 5px;</span><br><span class="line">  border-radius: 5px;</span><br><span class="line">&#125;</span><br><span class="line">button&#123;</span><br><span class="line">  @include border-radius;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@mixin border-radius(<span class="variable">$radius</span>:5px)&#123;</span><br><span class="line">  -webkit-border-radius: <span class="variable">$radius</span>;</span><br><span class="line">  border-radius: <span class="variable">$radius</span>;</span><br><span class="line">&#125;</span><br><span class="line">.nav&#123;</span><br><span class="line">  @include border-radius;</span><br><span class="line">&#125;</span><br><span class="line">.box&#123;</span><br><span class="line">  @include border-radius(3px);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@mixin center(<span class="variable">$width</span>,<span class="variable">$height</span>)&#123;</span><br><span class="line">  width: <span class="variable">$width</span>;</span><br><span class="line">  height: <span class="variable">$height</span>;</span><br><span class="line">  position: absolute;</span><br><span class="line">  top: 50%;</span><br><span class="line">  left: 50%;</span><br><span class="line">  margin-top: -(<span class="variable">$height</span>) / 2;</span><br><span class="line">  margin-left: -(<span class="variable">$width</span>) / 2;</span><br><span class="line">&#125;</span><br><span class="line">.box-center &#123;</span><br><span class="line">  @include center(500px,300px);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@mixin box-shadow(<span class="variable">$shadows</span>...)&#123;</span><br><span class="line">  @<span class="keyword">if</span> length(<span class="variable">$shadows</span>) &gt;= 1 &#123;</span><br><span class="line">    -webkit-box-shadow: <span class="variable">$shadows</span>;</span><br><span class="line">    box-shadow: <span class="variable">$shadows</span>;</span><br><span class="line">  &#125; @<span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable">$shadows</span>: 0 0 2px rgba(<span class="comment">#000,.25);</span></span><br><span class="line">    -webkit-box-shadow: <span class="variable">$shadow</span>;</span><br><span class="line">    box-shadow: <span class="variable">$shadow</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">.box &#123;</span><br><span class="line">  @include box-shadow(0 0 1px rgba(<span class="comment">#000,.5),0 0 2px rgba(#000,.2));</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote><p>混合宏会生成冗余代码</p>
+</blockquote>
+<h3 id="扩展-继承"><a href="#扩展-继承" class="headerlink" title="扩展/继承"></a>扩展/继承</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">.btn &#123;</span><br><span class="line">  border: 1px solid <span class="comment">#ccc;</span></span><br><span class="line">  padding: 6px 10px;</span><br><span class="line">  font-size: 14px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.btn-primary &#123;</span><br><span class="line">  background-color: <span class="comment">#f36;</span></span><br><span class="line">  color: <span class="comment">#fff;</span></span><br><span class="line">  @extend .btn;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.btn-second &#123;</span><br><span class="line">  background-color: orange;</span><br><span class="line">  color: <span class="comment">#fff;</span></span><br><span class="line">  @extend .btn;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote><p>不会生成冗余代码</p>
+</blockquote>
+<h3 id="占位符"><a href="#占位符" class="headerlink" title="占位符"></a>占位符</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">%mt5 &#123;</span><br><span class="line">  margin-top: 5px;</span><br><span class="line">&#125;</span><br><span class="line">%pt5&#123;</span><br><span class="line">  padding-top: 5px;</span><br><span class="line">&#125;</span><br><span class="line">.btn &#123;</span><br><span class="line">  @extend %mt5;</span><br><span class="line">  @extend %pt5;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote><p>mt5 和 pt5 并不会生成最终代码</p>
+</blockquote>
+<h3 id="插值"><a href="#插值" class="headerlink" title="插值#{}"></a>插值#{}</h3><blockquote><p>允许在#{}内部解析变量</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$properties</span>: (margin, padding);</span><br><span class="line">@mixin <span class="built_in">set</span>-value(<span class="variable">$side</span>, <span class="variable">$value</span>) &#123;</span><br><span class="line">  @each <span class="variable">$prop</span> <span class="keyword">in</span> <span class="variable">$properties</span> &#123;</span><br><span class="line">    <span class="comment">#&#123;$prop&#125;-#&#123;$side&#125;: $value;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">.login-box &#123;</span><br><span class="line">  @include <span class="built_in">set</span>-value(top, 14px);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><blockquote class="pullquote"><p>Sass 有时候也被称为 SCSS,两者之间不同之处有以下两点：</p>
+<ol>
+<li>类似 CSS 的注释方式，使用 ”/<em> ”开头，结属使用 ”</em>/ ”</li>
+<li>类似 JavaScript 的注释方式，使用“//”</li>
+</ol>
+</blockquote>
+<blockquote><p>两者区别，前者会在编译出来的 CSS 显示，后者在编译出来的 CSS 中不会显示</p>
+</blockquote>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><blockquote><p>Sass 和 JavaScript 语言类似，也具有自己的数据类型，在 Sass 中包含以下几种数据类型：</p>
+</blockquote>
+<blockquote class="pullquote"><ol>
+<li>数字: 如，1、 2、 13、 10px；</li>
+<li>字符串：有引号字符串或无引号字符串，如，”foo” ‘bar’ baz；</li>
+<li>颜色：如，blue, #04a3f9, rgba(255,0,0,0.5);</li>
+<li>布尔型：如，true, false；</li>
+<li>空值：如，null；</li>
+<li>值列表：用空格或者逗号分开，如，1.5em 1em 0 2em , Helvetica, Arial, sans-serif</li>
+</ol>
+</blockquote>
+<h3 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">.box &#123;</span><br><span class="line">  width: 20px + 8in;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$full</span>-width: 960px;</span><br><span class="line"><span class="variable">$sidebar</span>-width: 200px;</span><br><span class="line">.content &#123;</span><br><span class="line">  width: <span class="variable">$full</span>-width -  <span class="variable">$sidebar</span>-width;</span><br><span class="line">&#125;</span><br><span class="line">.box &#123;</span><br><span class="line">  width: 10px * 2;</span><br><span class="line">&#125;</span><br><span class="line">.box &#123;</span><br><span class="line">  width: (100px / 2);  </span><br><span class="line">&#125;</span><br><span class="line">p &#123;</span><br><span class="line">  font: 10px/8px;             // 纯 CSS，不是除法运算</span><br><span class="line">  <span class="variable">$width</span>: 1000px;</span><br><span class="line">  width: <span class="variable">$width</span>/2;            // 使用了变量，是除法运算</span><br><span class="line">  width: round(1.5)/2;        // 使用了函数，是除法运算</span><br><span class="line">  height: (500px/2);          // 使用了圆括号，是除法运算</span><br><span class="line">  margin-left: 5px + 8px/2px; // 使用了加（+）号，是除法运算</span><br><span class="line">&#125;</span><br><span class="line">.box &#123;</span><br><span class="line">  width: ((220px + 720px) - 11 * 20 ) / 12 ;  </span><br><span class="line">&#125;</span><br><span class="line">p &#123;</span><br><span class="line">  color: <span class="comment">#010203 + #040506;</span></span><br><span class="line">  background-color: <span class="comment">#010203 * 2;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$content</span>: <span class="string">"Hello"</span> + <span class="string">""</span> + <span class="string">"Sass!"</span>;</span><br><span class="line">.box:before &#123;</span><br><span class="line">  content: <span class="string">" #&#123;<span class="variable">$content</span>&#125; "</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Sass的高级特性"><a href="#Sass的高级特性" class="headerlink" title="Sass的高级特性"></a>Sass的高级特性</h2><h3 id="if"><a href="#if" class="headerlink" title="@if"></a>@if</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@mixin blockOrHidden(<span class="variable">$boolean</span>:<span class="literal">true</span>) &#123;</span><br><span class="line">  @<span class="keyword">if</span> <span class="variable">$boolean</span> &#123;</span><br><span class="line">    display: block;</span><br><span class="line">  &#125;</span><br><span class="line">  @<span class="keyword">else</span> &#123;</span><br><span class="line">    display: none;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">.block &#123;</span><br><span class="line">  @include blockOrHidden;</span><br><span class="line">&#125;</span><br><span class="line">.hidden&#123;</span><br><span class="line">  @include blockOrHidden(<span class="literal">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="for"><a href="#for" class="headerlink" title="@for"></a>@for</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">for</span> <span class="variable">$i</span> from &lt;start&gt; through &lt;end&gt;</span><br><span class="line">@<span class="keyword">for</span> <span class="variable">$i</span> from &lt;start&gt; to &lt;end&gt;</span><br><span class="line">@<span class="keyword">for</span> <span class="variable">$i</span> from 1 through 3 &#123;</span><br><span class="line">  .item-<span class="comment">#&#123;$i&#125; &#123; width: 2em * $i; &#125;</span></span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">for</span> <span class="variable">$i</span> from 1 to 3 &#123;</span><br><span class="line">  .item-<span class="comment">#&#123;$i&#125; &#123; width: 2em * $i; &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$grid</span>-prefix: span !default;</span><br><span class="line"><span class="variable">$grid</span>-width: 60px !default;</span><br><span class="line"><span class="variable">$grid</span>-gutter: 20px !default;</span><br><span class="line"></span><br><span class="line">%grid &#123;</span><br><span class="line">  <span class="built_in">float</span>: left;</span><br><span class="line">  margin-left: <span class="variable">$grid</span>-gutter / 2;</span><br><span class="line">  margin-right: <span class="variable">$grid</span>-gutter / 2;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">for</span> <span class="variable">$i</span> from 1 through 12 &#123;</span><br><span class="line">  .<span class="comment">#&#123;$grid-prefix&#125;#&#123;$i&#125;&#123;</span></span><br><span class="line">    width: <span class="variable">$grid</span>-width * <span class="variable">$i</span> + <span class="variable">$grid</span>-gutter * (<span class="variable">$i</span> - 1);</span><br><span class="line">    @extend %grid;</span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="each"><a href="#each" class="headerlink" title="@each"></a>@each</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$list</span>: adam john wynn mason kuroir; //<span class="variable">$list</span> 就是一个列表</span><br><span class="line">@mixin author-images &#123;</span><br><span class="line">    @each <span class="variable">$author</span> <span class="keyword">in</span> <span class="variable">$list</span> &#123;</span><br><span class="line">        .photo-<span class="comment">#&#123;$author&#125; &#123;</span></span><br><span class="line">            background: url(<span class="string">"/images/avatars/#&#123;<span class="variable">$author</span>&#125;.png"</span>) no-repeat;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">.author-bio &#123;</span><br><span class="line">    @include author-images;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Sass中的函数"><a href="#Sass中的函数" class="headerlink" title="Sass中的函数"></a>Sass中的函数</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">function</span> double(<span class="variable">$n</span>) &#123;</span><br><span class="line">  @<span class="built_in">return</span> <span class="variable">$n</span> * 2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#sidebar &#123;</span></span><br><span class="line">  width: double(5px);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="全部的内置函数"><a href="#全部的内置函数" class="headerlink" title="全部的内置函数"></a>全部的内置函数</h3><h4 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h4><blockquote><ol>
+<li>unquote</li>
+<li>quote</li>
+<li>To-upper-case</li>
+<li>To-lower-case</li>
+<li>percentage</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.footer&#123;</span><br><span class="line">  width : percentage(.2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote><ol>
+<li>round</li>
+<li>ceil</li>
+<li>floor</li>
+<li>abs</li>
+<li>min</li>
+<li>max</li>
+<li>random</li>
+</ol>
+</blockquote>
+<h4 id="列表函数"><a href="#列表函数" class="headerlink" title="列表函数"></a>列表函数</h4><blockquote><ol>
+<li>length 取列表数据的长度</li>
+<li>nth (10px 20px 30px, 1)</li>
+<li>join join(10px 20px, 30px 40px)</li>
+<li>append append(10px 20px ,30px)</li>
+<li>zip zip(1px 2px 3px,solid dashed dotted,green blue red)</li>
+<li>index index(1px solid red, solid)</li>
+<li>type-of type-of(100)</li>
+<li>unit 取单位</li>
+<li>unitless 判断一个值是否带有单位</li>
+<li>comparable 判断两个数是否可以进行加减合并</li>
+<li>if(true,1px,2px)</li>
+</ol>
+</blockquote>
+<h4 id="Maps函数"><a href="#Maps函数" class="headerlink" title="Maps函数"></a>Maps函数</h4><blockquote><ol>
+<li>map-get</li>
+<li>map-has-key</li>
+<li>map-keys</li>
+<li>map-values</li>
+<li>map-merge</li>
+<li>map-remove</li>
+<li>keywords </li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$map</span>: (</span><br><span class="line">  <span class="variable">$key1</span>: value1,</span><br><span class="line">  <span class="variable">$key2</span>: value2,</span><br><span class="line">  <span class="variable">$key3</span>: value3</span><br><span class="line">)   </span><br><span class="line"></span><br><span class="line"><span class="variable">$map</span>: (</span><br><span class="line">  key1: value1,</span><br><span class="line">  key2: (</span><br><span class="line">    key-1: value-1,</span><br><span class="line">    key-2: value-2,</span><br><span class="line">  ),</span><br><span class="line">key3: value3</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="variable">$theme</span>-color: (</span><br><span class="line">  default: (</span><br><span class="line">      bgcolor: <span class="comment">#fff,</span></span><br><span class="line">      text-color: <span class="comment">#444,</span></span><br><span class="line">      link-color: <span class="comment">#39f</span></span><br><span class="line">  ),</span><br><span class="line">  primary:(</span><br><span class="line">      bgcolor: <span class="comment">#000,</span></span><br><span class="line">      text-color:<span class="comment">#fff,</span></span><br><span class="line">      link-color: <span class="comment">#93f</span></span><br><span class="line">  ),</span><br><span class="line">  negative: (</span><br><span class="line">      bgcolor: <span class="comment">#f36,</span></span><br><span class="line">      text-color: <span class="comment">#fefefe,</span></span><br><span class="line">      link-color: <span class="comment">#d4e</span></span><br><span class="line">  )</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/* map-get */</span><br><span class="line"><span class="variable">$social</span>-colors: (</span><br><span class="line">  dribble: <span class="comment">#ea4c89,</span></span><br><span class="line">  facebook: <span class="comment">#3b5998,</span></span><br><span class="line">  github: <span class="comment">#171515,</span></span><br><span class="line">  google: <span class="comment">#db4437,</span></span><br><span class="line">  twitter: <span class="comment">#55acee</span></span><br><span class="line">);</span><br><span class="line">.btn-dribble&#123;</span><br><span class="line">  color: map-get(<span class="variable">$social</span>-colors,facebook);</span><br><span class="line">&#125;</span><br><span class="line">/* 没有值不会报错 */</span><br><span class="line">.btn-weibo&#123;</span><br><span class="line">  font-size: 12px;</span><br><span class="line">  color: map-get(<span class="variable">$social</span>-colors,weibo);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/* map中的容错函数 */</span><br><span class="line">@<span class="keyword">function</span> colors(<span class="variable">$color</span>)&#123;</span><br><span class="line">  @<span class="keyword">if</span> not map-has-key(<span class="variable">$social</span>-colors,<span class="variable">$color</span>)&#123;</span><br><span class="line">      @warn <span class="string">"No color found for `#&#123;<span class="variable">$color</span>&#125;` in <span class="variable">$social</span>-colors map. Property omitted."</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  @<span class="built_in">return</span> map-get(<span class="variable">$social</span>-colors,<span class="variable">$color</span>);</span><br><span class="line">&#125;</span><br><span class="line">.btn-dribble &#123;</span><br><span class="line">  color: colors(dribble);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/* each 遍历 map */</span><br><span class="line">@each <span class="variable">$name</span> <span class="keyword">in</span> map-keys(<span class="variable">$social</span>-colors)&#123;</span><br><span class="line">  .btn-<span class="comment">#&#123;$name&#125;&#123;</span></span><br><span class="line">      color: colors(<span class="variable">$name</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">for</span> <span class="variable">$i</span> from 1 through length(map-keys(<span class="variable">$social</span>-colors))&#123;</span><br><span class="line">  .btn-<span class="comment">#&#123;nth(map-keys($social-colors),$i)&#125; &#123;</span></span><br><span class="line">    color: colors(nth(map-keys(<span class="variable">$social</span>-colors),<span class="variable">$i</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">map-values(<span class="variable">$social</span>-colors)</span><br><span class="line">/*得到所有的值*/</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$color</span>: (</span><br><span class="line">  text: <span class="comment">#f36,</span></span><br><span class="line">  link: <span class="comment">#f63,</span></span><br><span class="line">  border: <span class="comment">#ddd,</span></span><br><span class="line">  backround: <span class="comment">#fff</span></span><br><span class="line">);</span><br><span class="line"><span class="variable">$typo</span>:(</span><br><span class="line">  font-size: 12px,</span><br><span class="line">  line-height: 1.6</span><br><span class="line">);</span><br><span class="line"><span class="variable">$newcolor</span> = map-merge(<span class="variable">$color</span>, <span class="variable">$typo</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/* 得到新值 */</span><br><span class="line"><span class="variable">$map</span>:map-remove(<span class="variable">$social</span>-colors,dribble);</span><br></pre></td></tr></table></figure>
+<h4 id="颜色函数"><a href="#颜色函数" class="headerlink" title="颜色函数"></a>颜色函数</h4><blockquote><ol>
+<li>rgb</li>
+<li>rgba</li>
+<li>red</li>
+<li>green</li>
+<li>blue</li>
+<li>mix 混合两种颜色 第三个参数为第一种颜色的比例 mix(blue,red,20%)</li>
+<li>lighten lighten(red, 20%);</li>
+<li>darken darken(red,30%);</li>
+<li>saturate 改变颜色的饱和度 参数单位为百分比 saturate(blue,20%)</li>
+<li>desaturate</li>
+<li>adjust-hue 通过调整色相 adjust-hue(blue,30deg)</li>
+<li>grayscale 直接让饱和度为0 grayscale(blue);</li>
+<li>alpha 获取透明度</li>
+<li>opacity 获取透明度</li>
+<li>fade-out 减少透明度</li>
+<li>opacify 增加透明度</li>
+<li>fade-in 增加透明度</li>
+<li>transparentize 减少透明度</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul class=<span class="string">"swatches red"</span>&gt;</span><br><span class="line">  &lt;li&gt;&lt;/li&gt;</span><br><span class="line">  ...      </span><br><span class="line">  &lt;li&gt;&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">&lt;ul class=<span class="string">"swatches orange"</span>&gt;</span><br><span class="line">  &lt;li&gt;&lt;/li&gt;</span><br><span class="line">  …</span><br><span class="line">  &lt;li&gt;&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">&lt;ul class=<span class="string">"swatches yellow"</span>&gt;</span><br><span class="line">  &lt;li&gt;&lt;/li&gt;</span><br><span class="line">  …</span><br><span class="line">  &lt;li&gt;&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">&lt;ul class=<span class="string">"swatches green"</span>&gt;</span><br><span class="line">  &lt;li&gt;&lt;/li&gt;</span><br><span class="line">  …</span><br><span class="line">  &lt;li&gt;&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">&lt;ul class=<span class="string">"swatches blue"</span>&gt;</span><br><span class="line">  &lt;li&gt;&lt;/li&gt;</span><br><span class="line">  …</span><br><span class="line">  &lt;li&gt;&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">&lt;ul class=<span class="string">"swatches purple"</span>&gt;</span><br><span class="line">  &lt;li&gt;&lt;/li&gt;</span><br><span class="line">  …</span><br><span class="line">  &lt;li&gt;&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$redBase</span>: <span class="comment">#DC143C;</span></span><br><span class="line"><span class="variable">$orangeBase</span>: saturate(lighten(adjust_hue(<span class="variable">$redBase</span>, 39), 5), 7);//<span class="comment">#f37a16</span></span><br><span class="line"><span class="variable">$yellowBase</span>: saturate(lighten(adjust_hue(<span class="variable">$redBase</span>, 64), 6), 13);//<span class="comment">#fbdc14</span></span><br><span class="line"><span class="variable">$greenBase</span>: desaturate(darken(adjust_hue(<span class="variable">$redBase</span>, 102), 2), 11);//<span class="comment">#73c620</span></span><br><span class="line"><span class="variable">$blueBase</span>: saturate(darken(adjust_hue(<span class="variable">$redBase</span>, 201), 2), 1);//<span class="comment">#12b7d4</span></span><br><span class="line"><span class="variable">$purpleBase</span>: saturate(darken(adjust_hue(<span class="variable">$redBase</span>, 296), 2), 1);//<span class="comment">#a012d4</span></span><br><span class="line"><span class="variable">$blackBase</span>: <span class="comment">#777;</span></span><br><span class="line"><span class="variable">$bgc</span>: <span class="comment">#fff;</span></span><br><span class="line"></span><br><span class="line">//定义颜色变暗的 mixin</span><br><span class="line">@mixin swatchesDarken(<span class="variable">$color</span>) &#123;</span><br><span class="line">  @<span class="keyword">for</span> <span class="variable">$i</span> from 1 through 10 &#123;</span><br><span class="line">    <span class="variable">$x</span>:<span class="variable">$i</span>+11;</span><br><span class="line">    li:nth-child(<span class="comment">#&#123;$x&#125;) &#123;</span></span><br><span class="line">      <span class="variable">$n</span>:<span class="variable">$i</span>*5;</span><br><span class="line">      <span class="variable">$bgc</span>:darken(<span class="variable">$color</span>,<span class="variable">$n</span>); //颜色变暗</span><br><span class="line">      background-color: <span class="variable">$bgc</span>;</span><br><span class="line">      &amp;:hover:before &#123; //hover状态显示颜色编号</span><br><span class="line">        content: <span class="string">"#&#123;<span class="variable">$bgc</span>&#125;"</span>;</span><br><span class="line">        color: lighten(<span class="variable">$bgc</span>,40);</span><br><span class="line">        font-family: verdana;</span><br><span class="line">        font-size: 8px;</span><br><span class="line">        padding: 2px;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">//定义颜色变亮的 mixin</span><br><span class="line">@mixin swatchesLighten(<span class="variable">$color</span>) &#123;</span><br><span class="line">  @<span class="keyword">for</span> <span class="variable">$i</span> from 1 through 10 &#123;</span><br><span class="line">    <span class="variable">$x</span>:11-<span class="variable">$i</span>;</span><br><span class="line">    li:nth-child(<span class="comment">#&#123;$x&#125;) &#123;</span></span><br><span class="line">      <span class="variable">$n</span>:<span class="variable">$i</span>*5;</span><br><span class="line">      <span class="variable">$bgc</span>:lighten(<span class="variable">$color</span>,<span class="variable">$n</span>);</span><br><span class="line">      background-color: <span class="variable">$bgc</span>;</span><br><span class="line">      &amp;:hover:before &#123;</span><br><span class="line">        content: <span class="string">"#&#123;<span class="variable">$bgc</span>&#125;"</span>;</span><br><span class="line">        color: darken(<span class="variable">$bgc</span>,40);</span><br><span class="line">        font-family: verdana;</span><br><span class="line">        font-size: 8px;</span><br><span class="line">        padding: 2px;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.swatches li &#123;    </span><br><span class="line">  width: 4.7619047619%;</span><br><span class="line">  <span class="built_in">float</span>: left;</span><br><span class="line">  height: 60px;</span><br><span class="line">  list-style: none outside none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ul.red &#123;</span><br><span class="line">  @include swatchesLighten(<span class="variable">$redBase</span>);</span><br><span class="line">  @include swatchesDarken(<span class="variable">$redBase</span>);</span><br><span class="line">  li:nth-child(11) &#123;</span><br><span class="line">    background-color: <span class="variable">$redBase</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ul.orange &#123;</span><br><span class="line">  @include swatchesLighten(<span class="variable">$orangeBase</span>);</span><br><span class="line">  @include swatchesDarken(<span class="variable">$orangeBase</span>);</span><br><span class="line">  li:nth-child(11) &#123;</span><br><span class="line">    background-color: <span class="variable">$orangeBase</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ul.yellow &#123;</span><br><span class="line">  @include swatchesLighten(<span class="variable">$yellowBase</span>);</span><br><span class="line">  @include swatchesDarken(<span class="variable">$yellowBase</span>);</span><br><span class="line">  li:nth-child(11) &#123;</span><br><span class="line">    background-color: <span class="variable">$yellowBase</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ul.green &#123;</span><br><span class="line">  @include swatchesLighten(<span class="variable">$greenBase</span>);</span><br><span class="line">  @include swatchesDarken(<span class="variable">$greenBase</span>);</span><br><span class="line">  li:nth-child(11) &#123;</span><br><span class="line">    background-color: <span class="variable">$greenBase</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ul.blue &#123;</span><br><span class="line">  @include swatchesLighten(<span class="variable">$blueBase</span>);</span><br><span class="line">  @include swatchesDarken(<span class="variable">$blueBase</span>);</span><br><span class="line">  li:nth-child(11) &#123;</span><br><span class="line">    background-color: <span class="variable">$blueBase</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ul.purple &#123;</span><br><span class="line">  @include swatchesLighten(<span class="variable">$purpleBase</span>);</span><br><span class="line">  @include swatchesDarken(<span class="variable">$purpleBase</span>);</span><br><span class="line">  li:nth-child(11) &#123;</span><br><span class="line">    background-color: <span class="variable">$purpleBase</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ul.black &#123;</span><br><span class="line">  @include swatchesLighten(<span class="variable">$blackBase</span>);</span><br><span class="line">  @include swatchesDarken(<span class="variable">$blackBase</span>);</span><br><span class="line">  li:nth-child(11) &#123;</span><br><span class="line">    background-color: <span class="variable">$blackBase</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Sass的-规则"><a href="#Sass的-规则" class="headerlink" title="Sass的@规则"></a>Sass的@规则</h2><blockquote><ol>
+<li>@import</li>
+<li>@media</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">.sidebar &#123;</span><br><span class="line">  width: 300px;</span><br><span class="line">  @media screen and (orientation: landscape) &#123;</span><br><span class="line">    width: 500px;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">@media screen &#123;</span><br><span class="line">  .sidebar &#123;</span><br><span class="line">    @media (orientation: landscape) &#123;</span><br><span class="line">      width: 500px;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$media</span>: screen;</span><br><span class="line"><span class="variable">$feature</span>: -webkit-min-device-pixel-ratio;</span><br><span class="line"><span class="variable">$value</span>: 1.5;</span><br><span class="line"></span><br><span class="line">@media <span class="comment">#&#123;$media&#125; and ($feature: $value) &#123;</span></span><br><span class="line">  .sidebar &#123;</span><br><span class="line">    width: 500px;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote><ol>
+<li>@extend</li>
+<li>@at-root</li>
+<li>@debug</li>
+<li>@warn</li>
+<li>@error</li>
+<li>@content</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$small</span> : 750px;</span><br><span class="line">@mixin  onsmall &#123;</span><br><span class="line">  @media  only screen and (max-width: <span class="variable">$small</span>)&#123;</span><br><span class="line">    @content;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.navbar-content&#123;</span><br><span class="line">  max-width:980px;</span><br><span class="line">  @include onsmall &#123;</span><br><span class="line">    min-width:320px;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@mixin useRem(<span class="variable">$size</span>)&#123;</span><br><span class="line">  <span class="variable">$device</span>-list : 320px, 375px , 414px;</span><br><span class="line">  html&#123;</span><br><span class="line">    @each <span class="variable">$device</span> <span class="keyword">in</span> <span class="variable">$device</span>-list&#123;</span><br><span class="line">      @media screen and (min-width: <span class="variable">$device</span>)&#123;</span><br><span class="line">        font-size: 100px * (<span class="variable">$device</span>/<span class="variable">$size</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">@include useRem(750px);</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上就是SASS的语法以及用法，多加练习，才能掌握它。<br><span id="busuanzi_container_page_pv"><br>  本文总阅读量<span id="busuanzi_value_page_pv"></span>次<br></span></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/blog/images/weixin.png" alt="Liqiang Zhao WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/blog/images/zhifubao.jpg" alt="Liqiang Zhao Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/前端/" rel="tag"># 前端</a>
+          
+            <a href="/blog/tags/sass/" rel="tag"># sass</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/Audio身上的属性方法和事件/" rel="next" title="Audio身上的属性方法和事件">
+                <i class="fa fa-chevron-left"></i> Audio身上的属性方法和事件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/ajax-与-fetch/" rel="prev" title="ajax 与 fetch">
+                ajax 与 fetch <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/blog/images/headers.jpg"
+               alt="Liqiang Zhao" />
+          <p class="site-author-name" itemprop="name">Liqiang Zhao</p>
+           
+              <p class="site-description motion-element" itemprop="description">这个年纪放弃梦想太年轻了不是吗</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/blog/">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/blog/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/blog/tags/index.html">
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/liqiangzhao" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/5349718021/home" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.baidu.com" target="_blank" title="Baidu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Baidu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=25867002&auto=0&height=66"></iframe>
+      </section>
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sass的安装"><span class="nav-number">2.</span> <span class="nav-text">Sass的安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sass的基本特性"><span class="nav-number">3.</span> <span class="nav-text">Sass的基本特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">3.1.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#嵌套"><span class="nav-number">3.2.</span> <span class="nav-text">嵌套</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#混合宏"><span class="nav-number">3.3.</span> <span class="nav-text">混合宏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展-继承"><span class="nav-number">3.4.</span> <span class="nav-text">扩展/继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#占位符"><span class="nav-number">3.5.</span> <span class="nav-text">占位符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插值"><span class="nav-number">3.6.</span> <span class="nav-text">插值#{}</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注释"><span class="nav-number">3.7.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-number">3.8.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运算"><span class="nav-number">3.9.</span> <span class="nav-text">运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sass的高级特性"><span class="nav-number">4.</span> <span class="nav-text">Sass的高级特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#if"><span class="nav-number">4.1.</span> <span class="nav-text">@if</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for"><span class="nav-number">4.2.</span> <span class="nav-text">@for</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#each"><span class="nav-number">4.3.</span> <span class="nav-text">@each</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sass中的函数"><span class="nav-number">5.</span> <span class="nav-text">Sass中的函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全部的内置函数"><span class="nav-number">5.1.</span> <span class="nav-text">全部的内置函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串函数"><span class="nav-number">5.1.1.</span> <span class="nav-text">字符串函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列表函数"><span class="nav-number">5.1.2.</span> <span class="nav-text">列表函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Maps函数"><span class="nav-number">5.1.3.</span> <span class="nav-text">Maps函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#颜色函数"><span class="nav-number">5.1.4.</span> <span class="nav-text">颜色函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sass的-规则"><span class="nav-number">6.</span> <span class="nav-text">Sass的@规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+本站总访问量<span id="busuanzi_value_site_pv"></span>次
+<br/>
+您是第<span id="busuanzi_value_site_uv"></span>个访问本站的小伙伴
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liqiang Zhao</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+  
+    <script type="text/javascript">
+    /*var rew=document.body.clientWidth;
+         var ewq=parseInt(rew/19);
+         // 这里的屏幕不一样对应的canvas上的点的数量也不一样
+        document.write(' <script type="text/javascript" color="38,42,48" opacity="0.7" zIndex="-2"  count="'+ewq+'" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js" > <script>')*/
+  </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+  
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysXVglHN';
+      var conf = 'aaa296b741b455f0fb72814196a0e914';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
