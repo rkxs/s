@@ -239,7 +239,7 @@ install_docker() {
 
 docker_run() {
 
-  docker run -itd --name centosaiguo -p 80:80 -p 442:443 --privileged=true registry.cn-beijing.aliyuncs.com/renkx/v2ray:0.1
+  docker run -itd --name centosaiguo -p 80:80 -p 443:443 --privileged=true registry.cn-beijing.aliyuncs.com/renkx/v2ray:0.1
 }
 
 update_sh() {
