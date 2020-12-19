@@ -237,6 +237,11 @@ install_docker() {
     docker version
 }
 
+docker_run() {
+
+  docker run -itd --name centosaiguo -p 80:80 -p 442:443 --privileged=true registry.cn-beijing.aliyuncs.com/renkx/v2ray:0.1
+}
+
 update_sh() {
     # 获取新的版本号
     ol_version=$(curl -L -s https://raw.githubusercontent.com/rkxs/s/${github_branch}/docker.sh | grep "shell_version=" | head -1 | awk -F '=|"' '{print $3}')
@@ -280,6 +285,9 @@ menu() {
         ;;
     3)
         exit 0
+        ;;
+    4)
+        docker_run
         ;;
     *)
         echo -e "${RedBG}请输入正确的数字${Font}"
