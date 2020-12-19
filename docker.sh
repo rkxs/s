@@ -174,34 +174,20 @@ dependency_install() {
     judge "安装 curl"
 
     if [[ "${ID}" == "centos" ]]; then
-        ${INS} -y groupinstall "Development tools"
-    else
-        ${INS} -y install build-essential
-    fi
-    judge "编译工具包 安装"
-
-    if [[ "${ID}" == "centos" ]]; then
         ${INS} -y install pcre pcre-devel zlib-devel epel-release
     else
         ${INS} -y install libpcre3 libpcre3-dev zlib1g-dev dbus
     fi
 
-    #    ${INS} -y install rng-tools
-    #    judge "rng-tools 安装"
-
     ${INS} -y install haveged
     #    judge "haveged 安装"
 
-    #    sed -i -r '/^HRNGDEVICE/d;/#HRNGDEVICE=\/dev\/null/a HRNGDEVICE=/dev/urandom' /etc/default/rng-tools
-
     if [[ "${ID}" == "centos" ]]; then
-        #       systemctl start rngd && systemctl enable rngd
-        #       judge "rng-tools 启动"
+
         systemctl start haveged && systemctl enable haveged
         #       judge "haveged 启动"
     else
-        #       systemctl start rng-tools && systemctl enable rng-tools
-        #       judge "rng-tools 启动"
+      
         systemctl start haveged && systemctl enable haveged
         #       judge "haveged 启动"
     fi
