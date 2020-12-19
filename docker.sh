@@ -64,7 +64,7 @@ check_system() {
         exit 1
     fi
 
-    $INS install dbus
+    $INS install -y dbus
 
     systemctl stop firewalld
     systemctl disable firewalld
@@ -187,7 +187,7 @@ dependency_install() {
         systemctl start haveged && systemctl enable haveged
         #       judge "haveged 启动"
     else
-      
+
         systemctl start haveged && systemctl enable haveged
         #       judge "haveged 启动"
     fi
@@ -200,7 +200,7 @@ basic_optimization() {
     echo '* soft nofile 65536' >>/etc/security/limits.conf
     echo '* hard nofile 65536' >>/etc/security/limits.conf
 
-    # 关闭 Selinux
+    # 关闭 Selinux 有可能出错 先不管
     if [[ "${ID}" == "centos" ]]; then
         sed -i 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config
         setenforce 0
@@ -220,6 +220,20 @@ install_docker() {
     chrony_install
     dependency_install
     basic_optimization
+
+    # 安装依赖包
+    yum install -y yum-utils device-mapper-persistent-data lvm2
+    # 添加Docker软件包源
+    yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+    # 关闭测试版本list（只显示稳定版）
+    yum-config-manager --enable docker-ce-edge
+    yum-config-manager --enable docker-ce-test
+    # 更新yum包索引
+    yum makecache fast
+    # 直接安装Docker CE
+    yum install docker-ce
+    systemctl start docker && systemctl enable docker
+    docker version
 }
 
 update_sh() {
