@@ -231,8 +231,9 @@ install_docker() {
     # 更新yum包索引
     yum makecache fast
     # 直接安装Docker CE
-    yum install docker-ce
+    yum install -y docker-ce
     systemctl start docker && systemctl enable docker
+    echo -e "${OK} ${GreenBG} docker 安装完成 ${Font}"
     docker version
 }
 
