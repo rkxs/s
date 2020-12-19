@@ -219,9 +219,9 @@ bbr_boost_sh() {
 install_docker() {
     is_root
     check_system
+    basic_optimization
     chrony_install
     dependency_install
-    basic_optimization
 }
 
 update_sh() {
@@ -249,11 +249,11 @@ update_sh() {
 
 menu() {
     update_sh
-    echo -e "\t docker 安装脚本 ${Red}[${shell_version}]${Font}"
+    echo -e "\tdocker 安装脚本 ${Red}[${shell_version}]${Font}"
     echo -e "\thttps://git.io/renkx\n"
 
     echo -e "—————————————— 安装向导 ——————————————"""
-    echo -e "${Green}1.${Font}  安装 V2Ray (Nginx+ws+tls)"
+    echo -e "${Green}1.${Font} 安装 docker"
     echo -e "${Green}2.${Font} 安装 4合1 bbr 锐速安装脚本"
     echo -e "${Green}3.${Font} 退出 \n"
 
