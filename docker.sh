@@ -64,7 +64,7 @@ check_system() {
         exit 1
     fi
 
-    $INS install dbus
+    $INS install -y dbus
 
     systemctl stop firewalld
     systemctl disable firewalld
@@ -115,22 +115,34 @@ chrony_install() {
     chronyc sourcestats -v
     chronyc tracking -v
     date
-    read -rp "请确认时间是否准确,误差范围±3分钟(Y/N): " chrony_install
-    [[ -z ${chrony_install} ]] && chrony_install="Y"
-    case $chrony_install in
-    [yY][eE][sS] | [yY])
-        echo -e "${GreenBG} 继续安装 ${Font}"
-        sleep 2
-        ;;
-    *)
-        echo -e "${RedBG} 安装终止 ${Font}"
-        exit 2
-        ;;
-    esac
+#    read -rp "请确认时间是否准确,误差范围±3分钟(Y/N): " chrony_install
+#    [[ -z ${chrony_install} ]] && chrony_install="Y"
+#    case $chrony_install in
+#    [yY][eE][sS] | [yY])
+#        echo -e "${GreenBG} 继续安装 ${Font}"
+#        sleep 2
+#        ;;
+#    *)
+#        echo -e "${RedBG} 安装终止 ${Font}"
+#        exit 2
+#        ;;
+#    esac
 }
 
 dependency_install() {
-    ${INS} install wget git lsof -y
+    # 设置软件源，并缓存软件包，【--import设置签名】
+    # remi源 php相关环境；ius源 git软件等
+    # Remi repository 是包含最新版本 PHP 和 MySQL 包的 Linux 源，由 Remi 提供维护。
+    # IUS（Inline with Upstream Stable）是一个社区项目，它旨在为 Linux 企业发行版提供可选软件的最新版 RPM 软件包。
+    rpm --import /etc/pki/rpm-gpg/*
+    ${INS} -y install yum-fastestmirror
+    ${INS} -y install https://mirrors.aliyun.com/remi/enterprise/remi-release-7.rpm
+    ${INS} -y install https://mirrors.aliyun.com/ius/ius-release-el7.rpm
+    rpm --import /etc/pki/rpm-gpg/*
+    ${INS} clean all
+    ${INS} makecache
+
+    ${INS} install wget zsh vim curl unzip net-tools git224 lsof -y
 
     if [[ "${ID}" == "centos" ]]; then
         ${INS} -y install crontabs
@@ -219,9 +231,9 @@ bbr_boost_sh() {
 install_docker() {
     is_root
     check_system
-    basic_optimization
     chrony_install
     dependency_install
+    basic_optimization
 }
 
 update_sh() {
