@@ -242,7 +242,7 @@ docker_run() {
   read -rp "请输入版本号：" vnum
   [[ -z ${vnum} ]] && vnum=0.1
 
-  docker run -itd --name centosaiguo -p 80:80 -p 443:443 --privileged=true --restart=always registry.cn-beijing.aliyuncs.com/renkx/v2ray:${vnum}
+  docker run -itd --name centosaiguo -p 80:80 -p 443:443 --privileged=true --restart=always --workdir="/root" registry.cn-beijing.aliyuncs.com/renkx/v2ray:${vnum}
 
   docker exec -it centosaiguo bash
 }
