@@ -79,10 +79,13 @@ old_config_exist_check() {
 
 echo_vmess_link()
 {
-  vmess="vmess://$(cat ${vmess_qr_config_file} | base64)"
+
+  vmess_link="vmess://$(base64 -w 0 $vmess_qr_config_file)"
 
   echo
-  echo -e $vmess
+  echo -e "${Red}${vmess_link}${Font}"
+  echo
+  echo
   exit 0
 }
 
