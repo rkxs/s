@@ -239,7 +239,10 @@ install_docker() {
 
 docker_run() {
 
-  docker run -itd --name centosaiguo -p 80:80 -p 443:443 --privileged=true --restart=always registry.cn-beijing.aliyuncs.com/renkx/v2ray:v0.1
+  read -rp "请输入版本号：" vnum
+  [[ -z ${vnum} ]] && vnum=0.1
+
+  docker run -itd --name centosaiguo -p 80:80 -p 443:443 --privileged=true --restart=always registry.cn-beijing.aliyuncs.com/renkx/v2ray:${vnum}
 
   docker exec -it centosaiguo bash
 }
