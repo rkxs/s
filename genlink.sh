@@ -73,7 +73,14 @@ create_vmess_URL_config() {
 old_config_exist_check() {
     if [[ -f $vmess_qr_config_file ]]; then
         echo -e "${OK} ${GreenBG} 检测到旧配置文件，是否读取旧文件配置 [Y/N]? ${Font}"
-        echo_vmess_link
+        read -r ssl_delete
+        case $ssl_delete in
+        [yY][eE][sS] | [yY])
+            echo_vmess_link
+            ;;
+        *)
+            ;;
+        esac
     fi
 }
 
