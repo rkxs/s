@@ -237,6 +237,19 @@ install_docker() {
     docker version
 }
 
+install_docker_compose()
+{
+  read -rp "请输入版本号（默认1.27.4）：" dockercomposevnum
+  [[ -z ${dockercomposevnum} ]] && dockercomposevnum=1.27.4
+
+    curl -L https://github.com/docker/compose/releases/download/${dockercomposevnum}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+    chmod +x /usr/local/bin/docker-compose
+    docker-compose --version
+    echo
+    echo -e "${OK} ${GreenBG} docker-compose 安装完成 ${Font}"
+    echo
+}
+
 docker_run() {
 
   read -rp "请输入版本号：" vnum
@@ -276,20 +289,24 @@ menu() {
     echo -e "\thttps://git.io/renkx\n"
 
     echo -e "—————————————— 安装向导 ——————————————"""
+    echo -e "${Green}0.${Font} 退出"
     echo -e "${Green}1.${Font} 安装 docker"
-    echo -e "${Green}2.${Font} 安装 4合1 bbr 锐速安装脚本"
-    echo -e "${Green}3.${Font} 退出 \n"
+    echo -e "${Green}2.${Font} 安装 docker-compose"
+    echo -e "${Green}3.${Font} 安装 4合1 bbr 锐速安装脚本 \n"
 
     read -rp "请输入数字：" menu_num
     case $menu_num in
+    0)
+        exit 0
+        ;;
     1)
         install_docker
         ;;
     2)
-        bbr_boost_sh
+        install_docker_compose
         ;;
     3)
-        exit 0
+        bbr_boost_sh
         ;;
     4)
         docker_run
