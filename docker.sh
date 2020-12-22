@@ -255,8 +255,8 @@ docker_run() {
   read -rp "请输入版本号：" vnum
   [[ -z ${vnum} ]] && vnum=0.1
 
-  # host网络模式启动
-  docker run -itd --name centosaiguo --network host -p 80:80 -p 443:443 --privileged=true --restart=always --workdir="/root" registry.cn-beijing.aliyuncs.com/renkx/v2ray:${vnum}
+  # host网络模式启动 如果host模式还设置端口映射 会出错
+  docker run -itd --name centosaiguo --network host --privileged=true --restart=always --workdir="/root" registry.cn-beijing.aliyuncs.com/renkx/v2ray:${vnum}
 
   docker exec -it centosaiguo bash
 }
