@@ -50,4 +50,6 @@ fi
 sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
 
 # 替换主题
-[ -f "~/.zshrc" ] && sed -i 's/ZSH_THEME=.*/ZSH_THEME="ys"/' ~/.zshrc
+if [[ -f ~/.zshrc ]]; then
+    sed -i 's/ZSH_THEME=.*/ZSH_THEME="ys"/' ~/.zshrc
+fi

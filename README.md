@@ -7,3 +7,8 @@ wget -N --no-check-certificate -q -O docker.sh "https://raw.githubusercontent.co
 ```
 wget -N --no-check-certificate -q -O genlink.sh "https://raw.githubusercontent.com/rkxs/s/main/genlink.sh" && chmod +x genlink.sh && bash genlink.sh
 ```
+
+### 安装on-my-zsh
+```
+sh -c "$(wget https://raw.githubusercontent.com/rkxs/s/main/myzsh.sh -O -)"
+```
