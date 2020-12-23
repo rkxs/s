@@ -8,6 +8,7 @@ cd "$(
 )" || exit
 
 zshrc_file=~/.zshrc
+ZSH=~/.oh-my-zsh
 
 command_exists() {
 	command -v "$@" >/dev/null 2>&1
@@ -54,7 +55,6 @@ EOF
   fi
 }
 
-
 setup_color
 
 command_exists git || {
@@ -69,4 +69,8 @@ fi
 # 编辑替换主题
 edit_zshrc
 
-sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+if [ -d "$ZSH" ]; then
+  echo "${YELLOW}文件夹已存在 ($ZSH).${RESET}"
+else
+  sh -c "$(wget --keep-zshrc https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+fi
