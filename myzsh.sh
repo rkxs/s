@@ -72,5 +72,5 @@ edit_zshrc
 if [ -d "$ZSH" ]; then
   echo "${YELLOW}文件夹已存在 ($ZSH).${RESET}"
 else
-  sh -c "$(wget --keep-zshrc https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
 fi

@@ -10,5 +10,5 @@ wget -N --no-check-certificate -q -O genlink.sh "https://raw.githubusercontent.c
 
 ### 安装on-my-zsh
 ```
-sh -c "$(wget https://raw.githubusercontent.com/rkxs/s/main/myzsh.sh -O -)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/myzsh.sh)"
 ```
