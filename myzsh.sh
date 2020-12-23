@@ -36,6 +36,25 @@ setup_color() {
 	fi
 }
 
+edit_zshrc() {
+  if [[ -f ${zshrc_file} ]]; then
+    sed -i 's/ZSH_THEME=.*/ZSH_THEME="ys"/' ${zshrc_file}
+  else
+    touch ${zshrc_file}
+    cat >${zshrc_file} <<EOF
+export ZSH="/root/.oh-my-zsh"
+
+ZSH_THEME="ys"
+
+plugins=(git)
+
+source $ZSH/oh-my-zsh.sh
+
+EOF
+  fi
+}
+
+
 setup_color
 
 command_exists git || {
@@ -47,9 +66,7 @@ if ! command_exists zsh; then
     yum -y install zsh
 fi
 
-sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+# 编辑替换主题
+edit_zshrc
 
-# 替换主题
-if [[ -f ~/.zshrc ]]; then
-    sed -i 's/ZSH_THEME=.*/ZSH_THEME="ys"/' ~/.zshrc
-fi
+sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
