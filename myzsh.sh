@@ -7,7 +7,7 @@ cd "$(
     pwd
 )" || exit
 
-zshrc_file="~/.zshrc"
+zshrc_file=~/.zshrc
 
 command_exists() {
 	command -v "$@" >/dev/null 2>&1
