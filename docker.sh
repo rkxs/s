@@ -261,6 +261,11 @@ docker_run() {
   docker exec -it centosaiguo bash
 }
 
+install_on_my_zsh()
+{
+  sh -c "$(wget https://raw.githubusercontent.com/rkxs/s/main/myzsh.sh -O -)"
+}
+
 update_sh() {
     # 获取新的版本号
     ol_version=$(curl -L -s https://raw.githubusercontent.com/rkxs/s/${github_branch}/docker.sh | grep "shell_version=" | head -1 | awk -F '=|"' '{print $3}')
@@ -293,7 +298,8 @@ menu() {
     echo -e "${Green}0.${Font} 退出"
     echo -e "${Green}1.${Font} 安装 docker"
     echo -e "${Green}2.${Font} 安装 docker-compose"
-    echo -e "${Green}3.${Font} 安装 4合1 bbr 锐速安装脚本 \n"
+    echo -e "${Green}3.${Font} 安装 4合1 bbr 锐速安装脚本"
+    echo -e "${Green}5.${Font} 安装 on-my-zsh \n"
 
     read -rp "请输入数字：" menu_num
     case $menu_num in
@@ -311,6 +317,9 @@ menu() {
         ;;
     4)
         docker_run
+        ;;
+    5)
+        install_on_my_zsh
         ;;
     *)
         echo -e "${RedBG}请输入正确的数字${Font}"
