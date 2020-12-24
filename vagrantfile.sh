@@ -13,6 +13,22 @@ sed -i 's/PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_co
 
 # 安装docker
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/install_docker.sh)"
+
+## 配置docker镜像加速器
+if [ ! -d /etc/docker/ ]; then
+  mkdir -p /etc/docker
+fi
+touch /etc/docker/daemon.json
+tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://m9wl9ue4.mirror.aliyuncs.com"]
+}
+EOF
+systemctl daemon-reload
+systemctl restart docker
+## 配置docker镜像加速器
+
+
 # 安装docker-compose
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/install_docker_compose.sh)"
 # 新增docker网络
@@ -23,7 +39,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/myzsh.sh)"
 # on-my-zsh脚本设置shell需要交互，所以需要手动设置shell
 chsh -s /bin/zsh
 
-#### 虚拟机特殊配置
+#### 虚拟机特殊配置 需要挂载相关目录
 rm ~/.zshrc
 ln -s /job/docker/box/zsh/zshrc ~/.zshrc
 ln -s /job/docker/box/zsh/zsh_history ~/.zsh_history
