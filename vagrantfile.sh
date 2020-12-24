@@ -42,6 +42,7 @@ chsh -s /bin/zsh
 #### 虚拟机特殊配置 需要挂载相关目录
 rm ~/.zshrc
 ln -s /job/docker/box/zsh/zshrc ~/.zshrc
+rm ~/.zsh_history
 ln -s /job/docker/box/zsh/zsh_history ~/.zsh_history
 bash /job/docker/shell/cp_ssh_git.sh
 #### 虚拟机特殊配置
