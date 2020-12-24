@@ -20,8 +20,18 @@ docker network create --subnet 1.1.0.1/24 docker
 
 # 安装on-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/myzsh.sh)"
-# 需要自行设置shell
+# on-my-zsh脚本设置shell需要交互，所以需要手动设置shell
 chsh -s /bin/zsh
-# 重启sshd 让root配置生效
+
+#### 虚拟机特殊配置
+rm ~/.zshrc
+ln -s /job/docker/box/zsh/zshrc ~/.zshrc
+ln -s /job/docker/box/zsh/zsh_history ~/.zsh_history
+#### 虚拟机特殊配置
+
+# 更改root密码
+echo root:qwer9987.|chpasswd
+# 最后重启sshd 让root sshd_config 配置生效
 systemctl restart sshd.service
-# 需要更改root密码才能root登录。。。
+# 重启
+reboot
