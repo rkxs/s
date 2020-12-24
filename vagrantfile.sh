@@ -56,6 +56,11 @@ if [[ -f /job/docker/shell/cp_ssh_git.sh ]]; then
 fi
 #### 虚拟机特殊配置
 
+### git log 中文乱码问题
+git config --global i18n.commitencoding utf-8
+git config --global i18n.logoutputencoding utf-8
+export LESSCHARSET=utf-8
+
 # 更改root密码
 echo root:qwer9987.|chpasswd
 # 最后重启sshd 让root sshd_config 配置生效
