@@ -28,11 +28,10 @@ systemctl daemon-reload
 systemctl restart docker
 ## 配置docker镜像加速器
 
-
-# 安装docker-compose
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/install_docker_compose.sh)"
 # 新增docker网络
 docker network create --subnet 1.1.0.1/24 docker
+# 安装docker-compose
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/install_docker_compose.sh)"
 
 # 安装on-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/myzsh.sh)"
@@ -40,10 +39,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/myzsh.sh)"
 chsh -s /bin/zsh
 
 #### 虚拟机特殊配置 需要挂载相关目录
-rm ~/.zshrc
-ln -s /job/docker/box/zsh/zshrc ~/.zshrc
-rm ~/.zsh_history
-ln -s /job/docker/box/zsh/zsh_history ~/.zsh_history
+rm ~/.zshrc && ln -s /job/docker/box/zsh/zshrc ~/.zshrc
+rm ~/.zsh_history && ln -s /job/docker/box/zsh/zsh_history ~/.zsh_history
 bash /job/docker/shell/cp_ssh_git.sh
 #### 虚拟机特殊配置
 
