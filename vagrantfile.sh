@@ -43,6 +43,7 @@ chsh -s /bin/zsh
 rm ~/.zshrc
 ln -s /job/docker/box/zsh/zshrc ~/.zshrc
 ln -s /job/docker/box/zsh/zsh_history ~/.zsh_history
+bash /job/docker/shell/cp_ssh_git.sh
 #### 虚拟机特殊配置
 
 # 更改root密码
