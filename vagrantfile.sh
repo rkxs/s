@@ -39,9 +39,21 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/myzsh.sh)"
 chsh -s /bin/zsh
 
 #### 虚拟机特殊配置 需要挂载相关目录
-rm ~/.zshrc && ln -s /job/docker/box/zsh/zshrc ~/.zshrc
-rm ~/.zsh_history && ln -s /job/docker/box/zsh/zsh_history ~/.zsh_history
-bash /job/docker/shell/cp_ssh_git.sh
+if [[ -f /job/docker/box/zsh/zshrc ]]; then
+  rm ~/.zshrc && ln -s /job/docker/box/zsh/zshrc ~/.zshrc
+fi
+
+if [[ -f /job/docker/box/zsh/zsh_history ]]; then
+  if [[ -f ~/.zsh_history ]]; then
+    rm ~/.zsh_history && ln -s /job/docker/box/zsh/zsh_history ~/.zsh_history
+  else
+    ln -s /job/docker/box/zsh/zsh_history ~/.zsh_history
+  fi
+fi
+
+if [[ -f /job/docker/shell/cp_ssh_git.sh ]]; then
+  bash /job/docker/shell/cp_ssh_git.sh
+fi
 #### 虚拟机特殊配置
 
 # 更改root密码
