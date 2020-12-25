@@ -62,7 +62,7 @@ install_frp()
   && mv frp_${FRP_VERSION}_linux_amd64 /frp && chmod -R 755 /frp
 
   echo -e "${OK} ${GreenBG} 已安装在 /frp 目录 ${Font}"
-  ls
+  ls -l /frp
   echo
 }
 
