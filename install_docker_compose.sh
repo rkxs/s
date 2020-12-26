@@ -61,8 +61,8 @@ command_exists() {
 
 install_docker_compose()
 {
-  read -rp "请输入版本号（默认1.22.0）：" dockercomposevnum
-  [[ -z ${dockercomposevnum} ]] && dockercomposevnum=1.22.0
+  read -rp "请输入版本号（默认1.27.4）：" dockercomposevnum
+  [[ -z ${dockercomposevnum} ]] && dockercomposevnum=1.27.4
 
   if ! command_exists curl; then
     $INS -y install curl
