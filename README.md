@@ -32,3 +32,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/vagrantfile.sh
 ```
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/install_frp.sh)"
 ```
+
+### index_docker_frp.sh
+```
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/index_docker_frp.sh)"
+```
