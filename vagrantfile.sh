@@ -28,8 +28,6 @@ systemctl daemon-reload
 systemctl restart docker
 ## 配置docker镜像加速器
 
-# 新增docker网络
-docker network create --subnet 1.1.0.1/24 docker
 # 安装docker-compose
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/install_docker_compose.sh)"
 
