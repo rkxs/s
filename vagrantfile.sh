@@ -37,10 +37,10 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/myzsh.sh)"
 chsh -s /bin/zsh
 
 #### 虚拟机特殊配置 需要挂载相关目录
+# zsh配置
 if [[ -f /job/docker/box/zsh/zshrc ]]; then
   rm ~/.zshrc && ln -s /job/docker/box/zsh/zshrc ~/.zshrc
 fi
-
 if [[ -f /job/docker/box/zsh/zsh_history ]]; then
   if [[ -f ~/.zsh_history ]]; then
     rm ~/.zsh_history && ln -s /job/docker/box/zsh/zsh_history ~/.zsh_history
@@ -48,10 +48,15 @@ if [[ -f /job/docker/box/zsh/zsh_history ]]; then
     ln -s /job/docker/box/zsh/zsh_history ~/.zsh_history
   fi
 fi
-
-if [[ -f /job/docker/shell/cp_ssh_git.sh ]]; then
-  bash /job/docker/shell/cp_ssh_git.sh
+# ssh秘钥和git处理
+if [[ -f /job/docker/box/shell/cp_ssh_git.sh ]]; then
+  bash /job/docker/box/shell/cp_ssh_git.sh
 fi
+# 虚拟机定时脚本设置
+if [[ -f /job/docker/box/crontabs/root ]]; then
+  crontab /job/docker/box/crontabs/root
+fi
+
 #### 虚拟机特殊配置
 
 ### git log 中文乱码问题
