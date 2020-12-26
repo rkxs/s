@@ -57,6 +57,16 @@ check_system() {
         echo -e "${Error} ${RedBG} 当前系统为 ${ID} ${VERSION_ID} 不在支持的系统列表内，安装中断 ${Font}"
         exit 1
     fi
+
+    $INS install -y dbus
+
+    systemctl stop firewalld
+    systemctl disable firewalld
+    echo -e "${OK} ${GreenBG} firewalld 已关闭 ${Font}"
+
+    systemctl stop ufw
+    systemctl disable ufw
+    echo -e "${OK} ${GreenBG} ufw 已关闭 ${Font}"
 }
 
 is_root() {
@@ -77,6 +87,42 @@ judge() {
         echo -e "${Error} ${RedBG} $1 失败${Font}"
         exit 1
     fi
+}
+
+chrony_install() {
+    ${INS} -y install chrony
+    judge "安装 chrony 时间同步服务 "
+
+    timedatectl set-ntp true
+
+    if [[ "${ID}" == "centos" ]]; then
+        systemctl enable chronyd && systemctl restart chronyd
+    else
+        systemctl enable chrony && systemctl restart chrony
+    fi
+
+    judge "chronyd 启动 "
+
+    timedatectl set-timezone Asia/Shanghai
+
+    echo -e "${OK} ${GreenBG} 等待时间同步 ${Font}"
+    sleep 10
+
+    chronyc sourcestats -v
+    chronyc tracking -v
+    date
+#    read -rp "请确认时间是否准确,误差范围±3分钟(Y/N): " chrony_install
+#    [[ -z ${chrony_install} ]] && chrony_install="Y"
+#    case $chrony_install in
+#    [yY][eE][sS] | [yY])
+#        echo -e "${GreenBG} 继续安装 ${Font}"
+#        sleep 2
+#        ;;
+#    *)
+#        echo -e "${RedBG} 安装终止 ${Font}"
+#        exit 2
+#        ;;
+#    esac
 }
 
 dependency_install() {
@@ -158,6 +204,7 @@ basic_optimization() {
 install_docker() {
     is_root
     check_system
+    chrony_install
     dependency_install
     basic_optimization
 
