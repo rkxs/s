@@ -201,6 +201,13 @@ basic_optimization() {
 
 }
 
+install_ctop() {
+  wget https://github.com/bcicen/ctop/releases/download/v0.7.5/ctop-0.7.5-linux-amd64 -O /usr/local/bin/ctop
+  judge "下载 ctop "
+  chmod +x /usr/local/bin/ctop
+  judge "设置 /usr/local/bin/ctop 执行权限 "
+}
+
 install_docker() {
     is_root
     check_system
@@ -224,7 +231,8 @@ install_docker() {
     judge "docker 已启动并开机自启"
     echo -e "${OK} ${GreenBG} docker 安装完成 ${Font}"
     docker version
-    echo
+
+    install_ctop
 }
 
 install_docker
