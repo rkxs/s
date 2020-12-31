@@ -7,6 +7,8 @@ cd "$(
     pwd
 )" || exit
 
+source '/etc/os-release'
+
 zshrc_file=~/.zshrc
 ZSH=~/.oh-my-zsh
 
@@ -63,7 +65,14 @@ command_exists git || {
 }
 
 if ! command_exists zsh; then
-    yum -y install zsh
+    if [[ "${ID}" == "centos" ]]; then
+        yum -y install zsh
+    elif [[ "${ID}" == "debian" ]]; then
+        apt-get -y install zsh
+    else
+        fmt_error "不支持此系统"
+        exit 1
+    fi
 fi
 
 # 编辑替换主题

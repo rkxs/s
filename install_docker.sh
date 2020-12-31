@@ -215,22 +215,28 @@ install_docker() {
     dependency_install
     basic_optimization
 
-    # 安装依赖包
-    yum install -y yum-utils device-mapper-persistent-data lvm2
-    # 添加Docker软件包源
-    yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-    # 关闭测试版本list（只显示稳定版）
-    yum-config-manager --enable docker-ce-edge
-    yum-config-manager --enable docker-ce-test
-    # 更新yum包索引
-    yum makecache fast
-    # 直接安装Docker CE
-    yum install -y docker-ce
-    judge "安装 docker-ce "
-    systemctl start docker && systemctl enable docker
-    judge "docker 已启动并开机自启"
-    echo -e "${OK} ${GreenBG} docker 安装完成 ${Font}"
-    docker version
+    if [[ "${ID}" == "centos" ]]; then
+        # 安装依赖包
+        yum install -y yum-utils device-mapper-persistent-data lvm2
+        # 添加Docker软件包源
+        yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+        # 关闭测试版本list（只显示稳定版）
+        yum-config-manager --enable docker-ce-edge
+        yum-config-manager --enable docker-ce-test
+        # 更新yum包索引
+        yum makecache fast
+        # 直接安装Docker CE
+        yum install -y docker-ce
+        judge "安装 docker-ce "
+        systemctl start docker && systemctl enable docker
+        judge "docker 已启动并开机自启"
+        echo -e "${OK} ${GreenBG} docker 安装完成 ${Font}"
+        docker version
+    elif [[ "${ID}" == "debian" ]]; then
+        curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+    else
+        echo
+    fi
 
     install_ctop
 }
