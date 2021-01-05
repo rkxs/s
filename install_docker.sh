@@ -35,6 +35,7 @@ Error="${Red}[错误]${Font}"
 #CENTOS_MANTISBT_PROJECT_VERSION="7"
 #REDHAT_SUPPORT_PRODUCT="centos"
 #REDHAT_SUPPORT_PRODUCT_VERSION="7"
+# source 只有在bash下才可用
 source '/etc/os-release'
 
 #从VERSION中提取发行版系统的英文名称，为了在debian/ubuntu下添加相对应的Nginx apt源
