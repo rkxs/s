@@ -49,10 +49,6 @@ check_system() {
         INS="apt"
         $INS update
         ## 添加 Nginx apt源
-    elif [[ "${ID}" == "ubuntu" && $(echo "${VERSION_ID}" | cut -d '.' -f1) -ge 16 ]]; then
-        echo -e "${OK} ${GreenBG} 当前系统为 Ubuntu ${VERSION_ID} ${UBUNTU_CODENAME} ${Font}"
-        INS="apt"
-        $INS update
     else
         echo -e "${Error} ${RedBG} 当前系统为 ${ID} ${VERSION_ID} 不在支持的系统列表内，安装中断 ${Font}"
         exit 1
@@ -126,23 +122,32 @@ chrony_install() {
 }
 
 dependency_install() {
-    # 设置软件源，并缓存软件包，【--import设置签名】
-    # remi源 php相关环境；ius源 git软件等
-    # Remi repository 是包含最新版本 PHP 和 MySQL 包的 Linux 源，由 Remi 提供维护。
-    # IUS（Inline with Upstream Stable）是一个社区项目，它旨在为 Linux 企业发行版提供可选软件的最新版 RPM 软件包。
-    rpm --import /etc/pki/rpm-gpg/*
-    ${INS} -y install yum-fastestmirror
-    ${INS} -y install https://mirrors.aliyun.com/remi/enterprise/remi-release-7.rpm
-    ${INS} -y install https://mirrors.aliyun.com/ius/ius-release-el7.rpm
-    rpm --import /etc/pki/rpm-gpg/*
-    ${INS} clean all
-    ${INS} makecache
-
-    ${INS} install wget zsh vim curl unzip net-tools git224 lsof -y
 
     if [[ "${ID}" == "centos" ]]; then
+        # 设置软件源，并缓存软件包，【--import设置签名】
+        # remi源 php相关环境；ius源 git软件等
+        # Remi repository 是包含最新版本 PHP 和 MySQL 包的 Linux 源，由 Remi 提供维护。
+        # IUS（Inline with Upstream Stable）是一个社区项目，它旨在为 Linux 企业发行版提供可选软件的最新版 RPM 软件包。
+        rpm --import /etc/pki/rpm-gpg/*
+        ${INS} -y install yum-fastestmirror
+        ${INS} -y install https://mirrors.aliyun.com/remi/enterprise/remi-release-7.rpm
+        ${INS} -y install https://mirrors.aliyun.com/ius/ius-release-el7.rpm
+        rpm --import /etc/pki/rpm-gpg/*
+        ${INS} clean all
+        ${INS} makecache
+    fi
+
+    ${INS} install wget zsh vim curl unzip net-tools lsof -y
+
+    if [[ "${ID}" == "centos" ]]; then
+        # centos 安装git
+        ${INS} install git224 -y
+
         ${INS} -y install crontabs
     else
+        # debian 安装git
+        ${INS} install git -y
+
         ${INS} -y install cron
     fi
     judge "安装 crontab"
