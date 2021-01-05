@@ -240,6 +240,19 @@ install_docker() {
         docker version
     elif [[ "${ID}" == "debian" ]]; then
         curl -fsSL https://get.docker.com | sh
+        ## 配置docker镜像加速器
+        if [ ! -d /etc/docker/ ]; then
+          mkdir -p /etc/docker
+        fi
+        touch /etc/docker/daemon.json
+        tee /etc/docker/daemon.json <<-'EOF'
+        {
+          "registry-mirrors": ["https://m9wl9ue4.mirror.aliyuncs.com"]
+        }
+        EOF
+        systemctl daemon-reload
+        systemctl restart docker
+        ## 配置docker镜像加速器
     else
         echo
     fi
