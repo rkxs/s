@@ -68,7 +68,7 @@ install_docker() {
 
 install_docker_compose()
 {
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/install_docker_compose.sh)"
+  wget -N --no-check-certificate -q -O install_docker_compose.sh "https://raw.githubusercontent.com/rkxs/s/main/install_docker_compose.sh" && chmod +x install_docker_compose.sh && bash install_docker_compose.sh
 }
 
 docker_run() {
@@ -84,7 +84,7 @@ docker_run() {
 
 install_on_my_zsh()
 {
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/myzsh.sh)"
+  wget -N --no-check-certificate -q -O myzsh.sh "https://raw.githubusercontent.com/rkxs/s/main/myzsh.sh" && chmod +x myzsh.sh && bash myzsh.sh
 }
 
 update_sh() {

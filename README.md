@@ -19,12 +19,12 @@ wget -N --no-check-certificate -q -O install_docker.sh "https://raw.githubuserco
 
 ### 安装on-my-zsh
 ```
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/myzsh.sh)"
+wget -N --no-check-certificate -q -O myzsh.sh "https://raw.githubusercontent.com/rkxs/s/main/myzsh.sh" && chmod +x myzsh.sh && bash myzsh.sh
 ```
 
 ### 安装docker-compose
 ```
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/install_docker_compose.sh)"
+wget -N --no-check-certificate -q -O install_docker_compose.sh "https://raw.githubusercontent.com/rkxs/s/main/install_docker_compose.sh" && chmod +x install_docker_compose.sh && bash install_docker_compose.sh
 ```
 
 ### vagrantfile.sh
