@@ -63,7 +63,7 @@ bbr_boost_sh() {
 }
 
 install_docker() {
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/install_docker.sh)"
+  wget -N --no-check-certificate -q -O install_docker.sh "https://raw.githubusercontent.com/rkxs/s/main/install_docker.sh" && chmod +x install_docker.sh && bash install_docker.sh
 }
 
 install_docker_compose()
