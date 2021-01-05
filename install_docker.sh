@@ -41,7 +41,7 @@ source '/etc/os-release'
 VERSION=$(echo "${VERSION}" | awk -F "[()]" '{print $2}')
 
 check_system() {
-    if [[ "${ID}" == "centos" && ${VERSION_ID} -ge 7 ]]; then
+    if [[ "${ec}" == "centos" && ${VERSION_ID} -ge 7 ]]; then
         echo -e "${OK} ${GreenBG} 当前系统为 Centos ${VERSION_ID} ${VERSION} ${Font}"
         INS="yum"
     elif [[ "${ID}" == "debian" && ${VERSION_ID} -ge 8 ]]; then
@@ -233,7 +233,7 @@ install_docker() {
         echo -e "${OK} ${GreenBG} docker 安装完成 ${Font}"
         docker version
     elif [[ "${ID}" == "debian" ]]; then
-        curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+        curl -fsSL https://get.docker.com | sh
     else
         echo
     fi
