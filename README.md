@@ -41,3 +41,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/install_frp.sh
 ```
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/index_docker_frp.sh)"
 ```
+
+### 官方脚本安装
+```
+wget -N --no-check-certificate -q -O install-release.sh "https://github.com/XTLS/Xray-install/raw/main/install-release.sh" && chmod +x install-release.sh && bash install-release.sh
+```
