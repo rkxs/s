@@ -50,6 +50,10 @@ check_system() {
         INS="apt"
         $INS update
         ## 添加 Nginx apt源
+    elif [[ "${ID}" == "ubuntu" && $(echo "${VERSION_ID}" | cut -d '.' -f1) -ge 16 ]]; then
+        echo -e "${OK} ${GreenBG} 当前系统为 Ubuntu ${VERSION_ID} ${UBUNTU_CODENAME} ${Font}"
+        INS="apt"
+        $INS update
     else
         echo -e "${Error} ${RedBG} 当前系统为 ${ID} ${VERSION_ID} 不在支持的系统列表内，安装中断 ${Font}"
         exit 1
@@ -238,7 +242,7 @@ install_docker() {
         judge "docker 已启动并开机自启"
         echo -e "${OK} ${GreenBG} docker 安装完成 ${Font}"
         docker version
-    elif [[ "${ID}" == "debian" ]]; then
+    else
         curl -fsSL https://get.docker.com | sh
         ## 配置docker镜像加速器
         if [ ! -d /etc/docker/ ]; then
@@ -249,8 +253,6 @@ install_docker() {
         systemctl daemon-reload
         systemctl restart docker
         ## 配置docker镜像加速器
-    else
-        echo
     fi
 
     install_ctop

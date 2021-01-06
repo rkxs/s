@@ -69,6 +69,8 @@ if ! command_exists zsh; then
         yum -y install zsh
     elif [[ "${ID}" == "debian" ]]; then
         apt-get -y install zsh
+    elif [[ "${ID}" == "ubuntu" ]]; then
+        apt -y install zsh
     else
         fmt_error "不支持此系统"
         exit 1
