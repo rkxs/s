@@ -6,9 +6,8 @@
 ```shell
 touch /etc/apt/sources.list.d/sources.list
 echo "deb http://deb.debian.org/debian buster-backports main" >> /etc/apt/sources.list.d/sources.list
-apt update
+apt update && apt -t buster-backports install linux-image-cloud-amd64
 
-apt search linux-image
 -------------------------------------------------------------
 echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
