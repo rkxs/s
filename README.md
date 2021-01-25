@@ -49,7 +49,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/vagrantfile.sh
 
 ### install_frp.sh
 ```shell
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/install_frp.sh)"
+wget -N --no-check-certificate -q -O install_frp.sh "https://raw.githubusercontent.com/rkxs/s/main/install_frp.sh" && chmod +x install_frp.sh && bash install_frp.sh
 ```
 
 ### index_docker_frp.sh
