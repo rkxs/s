@@ -34,7 +34,7 @@ check_system() {
         echo -e "${OK} ${GreenBG} 当前系统为 Centos ${VERSION_ID} ${VERSION} ${Font}"
         INS="yum"
     elif [[ "${ID}" == "alpine" ]]; then
-        echo -e "${OK} ${GreenBG} 当前系统为 Debian ${VERSION_ID} ${VERSION} ${Font}"
+        echo -e "${OK} ${GreenBG} 当前系统为 Alpine ${VERSION_ID} ${VERSION} ${Font}"
         sed -i "s/dl-cdn.alpinelinux.org/mirrors.aliyun.coms/g" /etc/apk/repositories
         INS="apk"
     else
