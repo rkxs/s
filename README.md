@@ -54,7 +54,7 @@ wget -N --no-check-certificate -q -O install_frp.sh "https://raw.githubuserconte
 
 ### index_docker_frp.sh
 ```shell
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/index_docker_frp.sh)"
+wget -N --no-check-certificate -q -O index_docker_frp.sh "https://raw.githubusercontent.com/rkxs/s/main/index_docker_frp.sh" && chmod +x index_docker_frp.sh && bash index_docker_frp.sh
 ```
 
 ### 官方脚本安装
