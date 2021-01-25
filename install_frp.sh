@@ -20,7 +20,7 @@ Font="\033[0m"
 OK="${Green}[OK]${Font}"
 Error="${Red}[错误]${Font}"
 
-FRP_VERSION="0.34.3"
+FRP_VERSION="0.35.0"
 GIT_FILE=https://github.com/fatedier/frp/releases/download/v${FRP_VERSION}/frp_${FRP_VERSION}_linux_amd64.tar.gz
 
 #获取系统相关参数
