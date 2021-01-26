@@ -1,6 +1,6 @@
 ##### 199.232.28.133 raw.githubusercontent.com raw.github.com
 
-##### git clone https://github.com/rkxs/ag.git && cd ag
+##### git clone https://github.com/rkxs/ag.git && cd ag && mkdir conf/default
 
 #### 更新debian内核
 ```shell
