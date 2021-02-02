@@ -7,6 +7,8 @@
 touch /etc/apt/sources.list.d/sources.list
 echo "deb http://deb.debian.org/debian buster-backports main" >> /etc/apt/sources.list.d/sources.list
 apt update && apt -t buster-backports install linux-image-cloud-amd64
+
+
 echo "net.core.default_qdisc=fq" >> /etc/sysctl.d/99-sysctl.conf
 echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.d/99-sysctl.conf
 sysctl -p
@@ -61,7 +63,7 @@ wget -N --no-check-certificate -q -O install_docker_frp.sh "https://raw.githubus
 wget -N --no-check-certificate -q -O install-release.sh "https://github.com/XTLS/Xray-install/raw/main/install-release.sh" && chmod +x install-release.sh && bash install-release.sh
 ```
 
-##### DD系统
+##### MoeClub.org
 ```shell
 #先切换到root权限
 sudo -i
@@ -80,6 +82,4 @@ wget --no-check-certificate -qO InstallNET.sh 'https://moeclub.org/attachment/Li
 
 # 安装debian 10 (-firmware 额外驱动支持)
 bash <(wget --no-check-certificate -qO- 'https://moeclub.org/attachment/LinuxShell/InstallNET.sh') -d 10 -v 64 -a -firmware
-
-# 用户名root,密码：MoeClub.org
 ```
