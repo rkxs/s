@@ -52,9 +52,9 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/rkxs/s/main/vagrantfile.sh
 wget -N --no-check-certificate -q -O install_frp.sh "https://raw.githubusercontent.com/rkxs/s/main/install_frp.sh" && chmod +x install_frp.sh && bash install_frp.sh
 ```
 
-### index_docker_frp.sh
+### install_docker_frp.sh
 ```shell
-wget -N --no-check-certificate -q -O index_docker_frp.sh "https://raw.githubusercontent.com/rkxs/s/main/index_docker_frp.sh" && chmod +x index_docker_frp.sh && bash index_docker_frp.sh
+wget -N --no-check-certificate -q -O install_docker_frp.sh "https://raw.githubusercontent.com/rkxs/s/main/install_docker_frp.sh" && chmod +x install_docker_frp.sh && bash install_docker_frp.sh
 ```
 
 ### 官方脚本安装
