@@ -53,6 +53,8 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+alias ag='export http_proxy=http://127.0.0.1:10801 https_proxy=http://127.0.0.1:10801 all_proxy=socks5://127.0.0.1:10800'
+
 EOF
   fi
 }
