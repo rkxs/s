@@ -83,3 +83,5 @@ wget --no-check-certificate -qO InstallNET.sh 'https://moeclub.org/attachment/Li
 # 安装debian 10 (-firmware 额外驱动支持)
 bash <(wget --no-check-certificate -qO- 'https://moeclub.org/attachment/LinuxShell/InstallNET.sh') -d 10 -v 64 -a -firmware
 ```
+
+##### https://github.com/rkxs/myconf/tree/agconf

@@ -7,6 +7,7 @@ cd "$(
     pwd
 )" || exit
 
+# without-passwords
 sudo -s
 sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 sed -i 's/PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config
