@@ -82,6 +82,8 @@ wget --no-check-certificate -qO InstallNET.sh 'https://moeclub.org/attachment/Li
 
 # 安装debian 10 (-firmware 额外驱动支持)
 bash <(wget --no-check-certificate -qO- 'https://moeclub.org/attachment/LinuxShell/InstallNET.sh') -d 10 -v 64 -a -firmware
+# 同上 新增阿里云镜像
+bash <(wget --no-check-certificate -qO- 'https://moeclub.org/attachment/LinuxShell/InstallNET.sh') -d 10 -v 64 -a -firmware --mirror 'http://mirrors.aliyun.com/debian'
 ```
 
 ##### https://github.com/rkxs/myconf/tree/agconf
