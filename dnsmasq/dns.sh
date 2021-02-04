@@ -49,6 +49,7 @@ if ! command_exists dnsmasq; then
     echo -e "${OK} ${GreenBG} dnsmasq 开机自启设置成功 ${Font}"
     dnsmasq_conf
     resolv_dnsmasq_conf
+    set_resolv_conf
     systemctl restart dnsmasq
     echo -e "${OK} ${GreenBG} dnsmasq 启动成功 ${Font}"
   else
@@ -107,7 +108,7 @@ if command_exists dnsmasq; then
   cat $resolvFile > /etc/resolv.dnsmasq.conf
   # 删除存在127.0.0.1的行
   sed -i '/127.0.0.1/d' /etc/resolv.dnsmasq.conf
-  
+
   echo "nameserver 1.1.1.1" >> /etc/resolv.dnsmasq.conf
   echo "nameserver 8.8.8.8" >> /etc/resolv.dnsmasq.conf
   echo "nameserver 8.8.4.4" >> /etc/resolv.dnsmasq.conf
