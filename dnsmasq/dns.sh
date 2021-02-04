@@ -154,6 +154,9 @@ fi
 }
 
 menu() {
+    echo
+    echo
+    echo 
     echo -e "\thttps://git.io/renkx\n"
 
     echo -e "—————————————— 安装向导 ——————————————"""
