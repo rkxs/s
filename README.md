@@ -25,7 +25,7 @@ wget -N --no-check-certificate -q -O docker.sh "https://raw.githubusercontent.co
 
 ##### dnsmasq
 ```shell
-wget -N --no-check-certificate -q -O dns.sh "https://raw.githubusercontent.com/rkxs/s/main/dnsmasq/dnsmasq" && chmod +x dns.sh && bash dns.sh
+wget -N --no-check-certificate -q -O dns.sh "https://raw.githubusercontent.com/rkxs/s/main/dnsmasq/dns.sh" && chmod +x dns.sh && bash dns.sh
 ```
 
 ##### 安装docker
