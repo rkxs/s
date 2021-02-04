@@ -23,9 +23,9 @@ lsmod | grep bbr
 wget -N --no-check-certificate -q -O docker.sh "https://raw.githubusercontent.com/rkxs/s/main/docker.sh" && chmod +x docker.sh && bash docker.sh
 ```
 
-##### 生成链接
+##### dnsmasq
 ```shell
-wget -N --no-check-certificate -q -O genlink.sh "https://raw.githubusercontent.com/rkxs/s/main/genlink.sh" && chmod +x genlink.sh && bash genlink.sh
+wget -N --no-check-certificate -q -O dns.sh "https://raw.githubusercontent.com/rkxs/s/main/dnsmasq/dnsmasq" && chmod +x dns.sh && bash dns.sh
 ```
 
 ##### 安装docker
