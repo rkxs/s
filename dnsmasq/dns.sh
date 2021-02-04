@@ -105,7 +105,9 @@ if command_exists dnsmasq; then
   fi
 
   cat $resolvFile > /etc/resolv.dnsmasq.conf
-
+  # 删除存在127.0.0.1的行
+  sed -i '/127.0.0.1/d' /etc/resolv.dnsmasq.conf
+  
   echo "nameserver 1.1.1.1" >> /etc/resolv.dnsmasq.conf
   echo "nameserver 8.8.8.8" >> /etc/resolv.dnsmasq.conf
   echo "nameserver 8.8.4.4" >> /etc/resolv.dnsmasq.conf
@@ -154,6 +156,13 @@ else
 fi
 }
 
+set_resolv_conf() {
+  echo
+  echo "nameserver 127.0.0.1" > /etc/resolv.conf
+  echo -e "${OK} ${GreenBG} /etc/resolv.conf 已配置为 127.0.0.1 ${Font}"
+  echo
+}
+
 menu() {
     echo
     echo
@@ -166,7 +175,8 @@ menu() {
     echo -e "${Green}2.${Font} 安装 dnsmasq"
     echo -e "${Green}3.${Font} 设置 /etc/dnsmasq.conf 文件"
     echo -e "${Green}4.${Font} 设置 /etc/resolv.dnsmasq.conf 文件"
-    echo -e "${Green}5.${Font} DNS解锁 奈飞 \n"
+    echo -e "${Green}5.${Font} 设置 /etc/resolv.conf 为 127.0.0.1"
+    echo -e "${Green}6.${Font} DNS解锁 奈飞 \n"
 
     read -rp "请输入数字：" menu_num
     case $menu_num in
@@ -190,6 +200,10 @@ menu() {
         menu
         ;;
     5)
+        set_resolv_conf
+        menu
+        ;;
+    6)
         unlock_netflix
         menu
         ;;
