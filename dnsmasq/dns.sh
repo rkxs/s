@@ -73,10 +73,6 @@ listen-address=127.0.0.1
 bind-interfaces
 
 all-servers
-server=1.1.1.1
-server=8.8.8.8
-server=8.8.4.4
-server=1.0.0.1
 
 clear-on-reload
 
@@ -109,6 +105,11 @@ if command_exists dnsmasq; then
   fi
 
   cat $resolvFile > /etc/resolv.dnsmasq.conf
+
+  echo "nameserver 1.1.1.1" >> /etc/resolv.dnsmasq.conf
+  echo "nameserver 8.8.8.8" >> /etc/resolv.dnsmasq.conf
+  echo "nameserver 8.8.4.4" >> /etc/resolv.dnsmasq.conf
+  echo "nameserver 1.0.0.1" >> /etc/resolv.dnsmasq.conf
 
   if [ $? -eq 0 ]; then
     echo -e "${OK} ${GreenBG} /etc/resolv.dnsmasq.conf 已配置 ${Font}"
@@ -156,7 +157,7 @@ fi
 menu() {
     echo
     echo
-    echo 
+    echo
     echo -e "\thttps://git.io/renkx\n"
 
     echo -e "—————————————— 安装向导 ——————————————"""
