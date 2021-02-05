@@ -137,13 +137,13 @@ if command_exists dnsmasq; then
       touch $unlockNetflix
     fi
 
-    echo "address=/netflix.com/$dnsIp" > $unlockNetflix
-    echo "address=/netflix.net/$dnsIp" >> $unlockNetflix
-    echo "address=/nflximg.net/$dnsIp" >> $unlockNetflix
-    echo "address=/nflximg.com/$dnsIp" >> $unlockNetflix
-    echo "address=/nflxvideo.net/$dnsIp" >> $unlockNetflix
-    echo "address=/nflxso.net/$dnsIp" >> $unlockNetflix
-    echo "address=/nflxext.com/$dnsIp" >> $unlockNetflix
+    echo "server=/netflix.com/$dnsIp" > $unlockNetflix
+    echo "server=/netflix.net/$dnsIp" >> $unlockNetflix
+    echo "server=/nflximg.net/$dnsIp" >> $unlockNetflix
+    echo "server=/nflximg.com/$dnsIp" >> $unlockNetflix
+    echo "server=/nflxvideo.net/$dnsIp" >> $unlockNetflix
+    echo "server=/nflxso.net/$dnsIp" >> $unlockNetflix
+    echo "server=/nflxext.com/$dnsIp" >> $unlockNetflix
 
     if [ $? -eq 0 ]; then
       systemctl restart dnsmasq
