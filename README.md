@@ -82,6 +82,11 @@ yum install -y xz openssl gawk file
 bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/veip007/dd/master/InstallNET.sh') -d 10 -v 64 -a -firmware
 # 同上 新增阿里云镜像
 bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/veip007/dd/master/InstallNET.sh') -d 10 -v 64 -a -firmware --mirror 'http://mirrors.aliyun.com/debian'
+# 同上 新增腾讯镜像
+bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/veip007/dd/master/InstallNET.sh') -d 10 -v 64 -a -firmware --mirror 'https://mirrors.cloud.tencent.com/debian'
+# 同上 新增腾讯内网镜像
+bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/veip007/dd/master/InstallNET.sh') -d 10 -v 64 -a -firmware --mirror 'https://mirrors.tencentyun.com/debian'
+
 ```
 
 ##### https://github.com/rkxs/myconf/tree/agconf
