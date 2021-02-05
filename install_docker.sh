@@ -181,19 +181,6 @@ dependency_install() {
     else
         ${INS} -y install libpcre3 libpcre3-dev zlib1g-dev dbus
     fi
-
-    ${INS} -y install haveged
-    #    judge "haveged 安装"
-
-    if [[ "${ID}" == "centos" ]]; then
-
-        systemctl start haveged && systemctl enable haveged
-        #       judge "haveged 启动"
-    else
-
-        systemctl start haveged && systemctl enable haveged
-        #       judge "haveged 启动"
-    fi
 }
 
 basic_optimization() {
