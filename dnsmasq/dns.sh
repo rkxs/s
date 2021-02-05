@@ -77,7 +77,7 @@ all-servers
 
 clear-on-reload
 
-cache-size=1000
+cache-size=1000000
 
 EOF
 
@@ -107,12 +107,13 @@ if command_exists dnsmasq; then
 
   cat $resolvFile > /etc/resolv.dnsmasq.conf
   # 删除存在127.0.0.1的行
-  sed -i '/127.0.0.1/d' /etc/resolv.dnsmasq.conf
+  sed -i '/^nameserver 127.0.0.1$/d' /etc/resolv.dnsmasq.conf
 
   echo "nameserver 1.1.1.1" >> /etc/resolv.dnsmasq.conf
   echo "nameserver 8.8.8.8" >> /etc/resolv.dnsmasq.conf
   echo "nameserver 8.8.4.4" >> /etc/resolv.dnsmasq.conf
   echo "nameserver 1.0.0.1" >> /etc/resolv.dnsmasq.conf
+  echo "nameserver 168.95.1.1" >> /etc/resolv.dnsmasq.conf
 
   if [ $? -eq 0 ]; then
     echo -e "${OK} ${GreenBG} /etc/resolv.dnsmasq.conf 已配置 ${Font}"
