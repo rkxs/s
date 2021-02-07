@@ -108,6 +108,11 @@ if command_exists dnsmasq; then
   cat $resolvFile > /etc/resolv.dnsmasq.conf
   # 删除存在127.0.0.1的行
   sed -i '/^nameserver 127.0.0.1$/d' /etc/resolv.dnsmasq.conf
+  sed -i '/^nameserver 1.1.1.1$/d' /etc/resolv.dnsmasq.conf
+  sed -i '/^nameserver 8.8.8.8$/d' /etc/resolv.dnsmasq.conf
+  sed -i '/^nameserver 8.8.4.4$/d' /etc/resolv.dnsmasq.conf
+  sed -i '/^nameserver 1.0.0.1$/d' /etc/resolv.dnsmasq.conf
+  sed -i '/^nameserver 168.95.1.1$/d' /etc/resolv.dnsmasq.conf
 
   echo "nameserver 1.1.1.1" >> /etc/resolv.dnsmasq.conf
   echo "nameserver 8.8.8.8" >> /etc/resolv.dnsmasq.conf
