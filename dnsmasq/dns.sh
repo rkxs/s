@@ -77,7 +77,7 @@ all-servers
 
 clear-on-reload
 
-cache-size=1000000
+cache-size=10000
 
 EOF
 
