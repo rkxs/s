@@ -82,7 +82,7 @@ EOF
   fi
 
   # host网络模式启动
-  docker run -itd --name smartdns --network host --privileged=true --restart=always -v ~/:/etc/smartdns/ registry.cn-hongkong.aliyuncs.com/renkx/smartdns:latest
+  docker run -itd --name smartdns --network host --privileged=true --restart=always -v ~/:/etc/smartdns/ registry.cn-beijing.aliyuncs.com/renkx/smartdns:latest
 
   judge "启动 smartdns "
 
