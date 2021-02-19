@@ -76,9 +76,9 @@ apt-get update
 yum update
 #确保安装了所需软件:
 #Debian/Ubuntu:
-apt-get install -y xz-utils openssl gawk file
+apt-get install -y xz-utils openssl gawk file wget vim
 #RedHat/CentOS:
-yum install -y xz openssl gawk file
+yum install -y xz openssl gawk file wget vim
 
 # 安装debian 10 (-firmware 额外驱动支持)
 bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/veip007/dd/master/InstallNET.sh') -d 10 -v 64 -a -firmware
