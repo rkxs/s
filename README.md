@@ -23,9 +23,11 @@ lsmod | grep bbr
 wget -N --no-check-certificate -q -O docker.sh "https://raw.githubusercontent.com/rkxs/s/main/docker.sh" && chmod +x docker.sh && bash docker.sh
 ```
 
-##### dnsmasq
+##### dns
 ```shell
-wget -N --no-check-certificate -q -O dns.sh "https://raw.githubusercontent.com/rkxs/s/main/dnsmasq/dns.sh" && chmod +x dns.sh && bash dns.sh
+wget -N --no-check-certificate -q -O dnsmasq.sh "https://raw.githubusercontent.com/rkxs/s/main/dns/dnsmasq.sh" && chmod +x dnsmasq.sh && bash dnsmasq.sh
+
+wget -N --no-check-certificate -q -O docker_smartdns.sh "https://raw.githubusercontent.com/rkxs/s/main/dns/docker_smartdns.sh" && chmod +x docker_smartdns.sh && bash docker_smartdns.sh
 ```
 
 ##### 安装docker
