@@ -45,9 +45,8 @@ bind-tcp 127.0.0.1:53
 
 # dns cache size
 cache-size 100000
-# 允许的最小TTL值
 rr-ttl-min 600
-# 日志级别 fatal,error,warn,notice,info,debug 默认error
+# fatal,error,warn,notice,info,debug default:error
 log-level error
 
 server 114.114.114.114
@@ -67,13 +66,10 @@ server-tcp 223.6.6.6
 server-tcp 180.76.76.76
 
 serve-expired yes
-# 一天失效
 serve-expired-ttl 86400
 
 
-# 开启域名预取，smartdns将在域名ttl即将超时的时候，再次发送查询请求，并缓存查询结果供后续使用
 prefetch-domain yes
-# 上游DNS返回多个结果时，使用ping方式作为测速方法，最多两个 tcp:80,tcp:443,ping
 speed-check-mode tcp:443,tcp:80,ping
 
 EOF
