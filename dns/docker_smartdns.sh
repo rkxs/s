@@ -39,9 +39,9 @@ docker_run() {
 
   cat >~/smartdns.conf <<EOF
 # UDP
-bind :53
+bind 127.0.0.1:53
 # TCP
-bind-tcp :53
+bind-tcp 127.0.0.1:53
 
 # dns cache size
 cache-size 100000
