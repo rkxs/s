@@ -61,9 +61,9 @@ command_exists() {
 
 install_docker_compose()
 {
-  echo -e "${OK} ${GreenBG} 当前版本 1.28.2，准备执行 ${Font}"
-  #read -rp "请输入版本号（默认1.28.2）：" dockercomposevnum
-  [[ -z ${dockercomposevnum} ]] && dockercomposevnum=1.28.2
+  echo -e "${OK} ${GreenBG} 当前版本 1.28.5，准备执行 ${Font}"
+  #read -rp "请输入版本号（默认1.28.5）：" dockercomposevnum
+  [[ -z ${dockercomposevnum} ]] && dockercomposevnum=1.28.5
 
   if ! command_exists curl; then
     $INS -y install curl
