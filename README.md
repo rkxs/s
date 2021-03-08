@@ -89,6 +89,7 @@ bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/veip0
 # 同上 新增腾讯内网镜像
 bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/veip007/dd/master/InstallNET.sh') -d 10 -v 64 -a -firmware --mirror 'https://mirrors.tencentyun.com/debian'
 
+# DD完成之后 有些必须安装qemu-guest-agent，否则会出现自动关机的情况
 ```
 
 ##### https://github.com/rkxs/myconf/tree/agconf
