@@ -4,6 +4,21 @@
 
 ##### curl -fsSL git.io/speedtest-cli.sh | bash
 
+```shell
+curl -fsSL git.io/wgcf.sh | bash
+wgcf register
+wgcf generate
+
+cp wgcf-profile.conf /etc/wireguard/wgcf.conf
+wg-quick up wgcf
+ip a
+curl -6 ip.p3terx.com
+wg-quick down wgcf
+
+systemctl start wg-quick@wgcf
+systemctl enable wg-quick@wgcf
+```
+
 ##### docker 安装
 ```shell
 wget -N --no-check-certificate -q -O docker.sh "https://raw.githubusercontent.com/rkxs/s/main/docker.sh" && chmod +x docker.sh && bash docker.sh
