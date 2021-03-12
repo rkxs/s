@@ -2,22 +2,6 @@
 
 ##### git clone https://github.com/rkxs/ag.git && cd ag && mkdir conf/default
 
-##### 更新debian内核
-```shell
-touch /etc/apt/sources.list.d/sources.list
-echo "deb http://deb.debian.org/debian buster-backports main" >> /etc/apt/sources.list.d/sources.list
-apt update && apt -t buster-backports install linux-image-cloud-amd64
-
-
-echo "net.core.default_qdisc=fq" >> /etc/sysctl.d/99-sysctl.conf
-echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.d/99-sysctl.conf
-sysctl -p
-lsmod | grep bbr
-
-# /etc/sysctl.conf
-```
-
-
 ##### docker 安装
 ```shell
 wget -N --no-check-certificate -q -O docker.sh "https://raw.githubusercontent.com/rkxs/s/main/docker.sh" && chmod +x docker.sh && bash docker.sh

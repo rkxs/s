@@ -110,8 +110,39 @@ update_sh() {
     fi
 }
 
+# 只能升级debian系统
+upgrading_system() {
+  # 升级内核
+  if [[ "${ID}" == "debian" ]]; then
+      apt update
+      apt install lsb-release -y
+      # 添加源并更新
+      echo "deb http://deb.debian.org/debian $(lsb_release -sc)-backports main" | tee /etc/apt/sources.list.d/sources.list
+      apt update
+      # 安装网络工具包
+      apt install net-tools iproute2 openresolv dnsutils -y
+      # 安装 wireguard-tools (WireGuard 配置工具：wg、wg-quick)
+      apt install wireguard-tools --no-install-recommends -y
+      # 更新最新内核
+      apt -t $(lsb_release -sc)-backports install linux-image-$(dpkg --print-architecture) linux-headers-$(dpkg --print-architecture) --install-recommends -y
+
+      echo -e "${RedBG}需要 reboot${Font}"
+      echo
+  fi
+}
+
+open_bbr() {
+  if [[ "${ID}" == "debian" ]]; then
+      # 开启BBR
+      echo "net.core.default_qdisc=fq" >> /etc/sysctl.d/99-sysctl.conf
+      echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.d/99-sysctl.conf
+      sysctl -p
+      lsmod | grep bbr
+  fi
+}
+
 menu() {
-    update_sh
+    # update_sh
     echo -e "\tdocker 安装脚本 ${Red}[${shell_version}]${Font}"
     echo -e "\thttps://git.io/renkx\n"
 
@@ -120,7 +151,9 @@ menu() {
     echo -e "${Green}1.${Font} 安装 docker"
     echo -e "${Green}2.${Font} 安装 docker-compose"
     echo -e "${Green}3.${Font} 安装 4合1 bbr 锐速安装脚本"
-    echo -e "${Green}5.${Font} 安装 on-my-zsh \n"
+    echo -e "${Green}4.${Font} 升级debian系统内核"
+    echo -e "${Green}5.${Font} 开启BBR"
+    echo -e "${Green}6.${Font} 安装 on-my-zsh \n"
 
     read -rp "请输入数字：" menu_num
     case $menu_num in
@@ -129,21 +162,31 @@ menu() {
         ;;
     1)
         install_docker
+        menu
         ;;
     2)
         install_docker_compose
+        menu
         ;;
     3)
         bbr_boost_sh
+        menu
         ;;
     4)
-        docker_run
+        upgrading_system
+        menu
         ;;
     5)
+        open_bbr
+        menu
+        ;;
+    6)
         install_on_my_zsh
+        menu
         ;;
     *)
         echo -e "${RedBG}请输入正确的数字${Font}"
+        menu
         ;;
     esac
 }
