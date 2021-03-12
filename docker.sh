@@ -123,7 +123,7 @@ upgrading_system() {
       apt install net-tools iproute2 openresolv dnsutils -y
       # 安装 wireguard-tools (WireGuard 配置工具：wg、wg-quick)
       apt install wireguard-tools --no-install-recommends -y
-      # 更新最新内核
+      # 更新最新内核 linux-image-cloud-amd64 cloud比较小
       apt -t $(lsb_release -sc)-backports install linux-image-$(dpkg --print-architecture) linux-headers-$(dpkg --print-architecture) --install-recommends -y
 
       echo -e "${RedBG}需要 reboot${Font}"

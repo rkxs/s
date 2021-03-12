@@ -2,6 +2,8 @@
 
 ##### git clone https://github.com/rkxs/ag.git && cd ag && mkdir conf/default
 
+##### curl -fsSL git.io/speedtest-cli.sh | bash
+
 ##### docker 安装
 ```shell
 wget -N --no-check-certificate -q -O docker.sh "https://raw.githubusercontent.com/rkxs/s/main/docker.sh" && chmod +x docker.sh && bash docker.sh
