@@ -56,9 +56,10 @@ wget -N --no-check-certificate -q -O install_frp.sh "https://raw.githubuserconte
 wget -N --no-check-certificate -q -O install_docker_frp.sh "https://raw.githubusercontent.com/rkxs/s/main/install_docker_frp.sh" && chmod +x install_docker_frp.sh && bash install_docker_frp.sh
 ```
 
-##### install_docker_frp.sh
+##### nezha
 ```shell
-wget -N --no-check-certificate -q -O install_docker_frp.sh "https://raw.githubusercontent.com/rkxs/s/main/install_docker_frp.sh" && chmod +x install_docker_frp.sh && bash install_docker_frp.sh
+curl -L https://raw.githubusercontent.com/naiba/nezha/master/script/install.sh -o nezha.sh && chmod +x nezha.sh
+./nezha.sh
 ```
 
 ##### install_docker_gost.sh
